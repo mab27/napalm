@@ -1,3 +1,5 @@
+### Parse native configuration and return and OpenConfig object
+
 from napalm_base import get_network_driver
 import napalm_yang
 from pprint import pprint

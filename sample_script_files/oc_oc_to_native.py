@@ -1,3 +1,5 @@
+### Translate OpenConfig to native  configuration
+
 from napalm_base import get_network_driver
 import napalm_yang
 from pprint import pprint
