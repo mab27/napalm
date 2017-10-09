@@ -1,3 +1,4 @@
+from json import dumps
 from napalm_base import get_network_driver
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -23,6 +24,9 @@ print('-'*60)
 
 with eos_driver(**eos_configuration) as eos:
 	pp.pprint(eos.get_bgp_neighbors())
+	print('-'*60)
+	print('-'*60)
+	print dumps(eos.get_bgp_neighbors(), indent=4)
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
@@ -30,6 +34,14 @@ print('-'*60)
 
 with junos_driver(**junos_configuration) as junos:
 	pp.pprint(junos.get_bgp_neighbors())
+	print('-'*60)
+	print('-'*60)
+	print dumps(junos.get_bgp_neighbors(), indent=4)
 
 print('-'*60)
 print('-'*60)
+
+
+
+
+

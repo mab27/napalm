@@ -42,6 +42,11 @@ print('-'*60)
 
 
 
+device = junos_driver(hostname='192.168.0.30', username='mab', password='mab123')
+device.open()
+change_configuration(device,"system {host-name par.vmx2;}")
+
+
 
 
 
