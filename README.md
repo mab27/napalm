@@ -384,6 +384,153 @@ mab@mab-infra:~$ napalm --user admin --password admin123 --vendor eos arista1 ca
 mab@mab-infra:~$ 
 ```
 
+```
+mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 configure mab_automate/napalm/junos_new_config.txt --strategy merge --dry-run
+[edit protocols bgp group underlay]
+      neighbor 172.16.0.70 { ... }
++     neighbor 172.16.0.80 {
++         description arista2;
++         peer-as 65080;
++     }
+mab@mab-infra:~$ 
+mab@mab-infra:~$ 
+mab@mab-infra:~$ 
+mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 call get_bgp_config
+{
+    "underlay": {
+        "neighbors": {
+            "172.16.0.70": {
+                "export_policy": "", 
+                "remote_as": 65070, 
+                "route_reflector_client": false, 
+                "prefix_limit": {}, 
+                "local_as": 0, 
+                "nhs": false, 
+                "import_policy": "", 
+                "local_address": "", 
+                "authentication_key": "", 
+                "description": "arista1"
+            }
+        }, 
+        "export_policy": "bgp-out", 
+        "remote_as": 0, 
+        "description": "", 
+        "prefix_limit": {}, 
+        "local_as": 65030, 
+        "multihop_ttl": 0, 
+        "apply_groups": [], 
+        "local_address": "", 
+        "remove_private_as": false, 
+        "multipath": true, 
+        "type": "external", 
+        "import_policy": "bgp-in"
+    }
+}
+mab@mab-infra:~$ 
+mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 configure mab_automate/napalm/junos_new_config.txt --strategy merge 
+[edit protocols bgp group underlay]
+      neighbor 172.16.0.70 { ... }
++     neighbor 172.16.0.80 {
++         description arista2;
++         peer-as 65080;
++     }
+mab@mab-infra:~$ 
+mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 call get_bgp_config
+{
+    "underlay": {
+        "neighbors": {
+            "172.16.0.80": {
+                "export_policy": "", 
+                "remote_as": 65080, 
+                "route_reflector_client": false, 
+                "prefix_limit": {}, 
+                "local_as": 0, 
+                "nhs": false, 
+                "import_policy": "", 
+                "local_address": "", 
+                "authentication_key": "", 
+                "description": "arista2"
+            }, 
+            "172.16.0.70": {
+                "export_policy": "", 
+                "remote_as": 65070, 
+                "route_reflector_client": false, 
+                "prefix_limit": {}, 
+                "local_as": 0, 
+                "nhs": false, 
+                "import_policy": "", 
+                "local_address": "", 
+                "authentication_key": "", 
+                "description": "arista1"
+            }
+        }, 
+        "export_policy": "bgp-out", 
+        "remote_as": 0, 
+        "description": "", 
+        "prefix_limit": {}, 
+        "local_as": 65030, 
+        "multihop_ttl": 0, 
+        "apply_groups": [], 
+        "local_address": "", 
+        "remove_private_as": false, 
+        "multipath": true, 
+        "type": "external", 
+        "import_policy": "bgp-in"
+    }
+}
+mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 call get_bgp_neighbors
+{
+    "global": {
+        "router_id": "30.30.30.30", 
+        "peers": {
+            "172.16.0.80": {
+                "is_enabled": true, 
+                "uptime": 27, 
+                "remote_as": 65080, 
+                "address_family": {
+                    "ipv4": {
+                        "sent_prefixes": -1, 
+                        "accepted_prefixes": -1, 
+                        "received_prefixes": -1
+                    }, 
+                    "ipv6": {
+                        "sent_prefixes": -1, 
+                        "accepted_prefixes": -1, 
+                        "received_prefixes": -1
+                    }
+                }, 
+                "remote_id": "", 
+                "local_as": 65030, 
+                "is_up": false, 
+                "description": "arista2"
+            }, 
+            "172.16.0.70": {
+                "is_enabled": true, 
+                "uptime": 604, 
+                "remote_as": 65070, 
+                "address_family": {
+                    "ipv4": {
+                        "sent_prefixes": 2, 
+                        "accepted_prefixes": 0, 
+                        "received_prefixes": 0
+                    }, 
+                    "ipv6": {
+                        "sent_prefixes": -1, 
+                        "accepted_prefixes": -1, 
+                        "received_prefixes": -1
+                    }
+                }, 
+                "remote_id": "70.70.70.70", 
+                "local_as": 65030, 
+                "is_up": true, 
+                "description": "arista1"
+            }
+        }
+    }
+}
+```
+
+
 ### Debub mode:
 ```
 mab@mab-infra:~$ napalm --debug --user admin --password admin123 --vendor eos arista1 call cli --method-kwargs "commands=['show  version']"
