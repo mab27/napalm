@@ -1,0 +1,48 @@
+{
+    "interfaces": {
+        "interface": {
+            "ge-0/0/0": {
+                "name": "ge-0/0/0", 
+                "subinterfaces": {
+                    "subinterface": {
+                        "0": {
+                            "index": "0", 
+                            "ipv4": {
+                                "config": {
+                                    "enabled": true
+                                }, 
+                                "addresses": {
+                                    "address": {
+                                        "192.168.0.35": {
+                                            "ip": "192.168.0.35", 
+                                            "config": {
+                                                "ip": "192.168.0.35", 
+                                                "prefix-length": 24
+                                            }
+                                        }
+                                    }
+                                }
+                            }, 
+                            "config": {
+                                "enabled": true, 
+                                "name": "0"
+                            }
+                        }
+                    }
+                }, 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": false
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": true, 
+                    "name": "ge-0/0/0"
+                }
+            }
+        }
+    }
+}
