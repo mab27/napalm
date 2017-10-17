@@ -1,0 +1,9 @@
+ip routing
+!
+router bgp {{ local_asn }}
+   router-id {{ loopback }}
+{% for neighbor in neighbors %}
+   neighbor {{ neighbor.peer_ip }} remote-as {{ neighbor.asn }}
+   neighbor {{ neighbor.peer_ip }} description {{ neighbor.name }}
+{% endfor %}
+!

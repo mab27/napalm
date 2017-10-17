@@ -1,10 +1,9 @@
-### Parse native configuration and return and OpenConfig object
-
 from napalm_base import get_network_driver
 import napalm_yang
-from pprint import pprint
 from json import dumps
+from pprint import pprint
 
+# Create Device Object
 junos_driver = get_network_driver('junos')
 
 junos_device = {

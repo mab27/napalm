@@ -1,0 +1,29 @@
+---
+arista1:
+    mgmt_ip: 192.168.0.70
+    username: admin
+    password: admin123
+    driver: eos
+    bgp_config: config_variables/arista1.yml
+    hostname: par.arista1
+arista2:
+    mgmt_ip: 192.168.0.80
+    username: admin
+    password: admin123
+    driver: eos
+    bgp_config: config_variables/arista2.yml
+    hostname: par.arista2
+vmx1:
+    mgmt_ip: 192.168.0.30
+    username: mab
+    password: mab123
+    driver: junos
+    bgp_config: config_variables/vmx1.yml
+    hostname: lon.vmx1
+vmx2:
+    mgmt_ip: 192.168.0.40
+    username: mab
+    password: mab123
+    driver: junos
+    bgp_config: config_variables/vmx2.yml
+    hostname: lon.vmx2

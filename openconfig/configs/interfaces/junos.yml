@@ -1,0 +1,90 @@
+{
+    "interfaces": {
+        "interface": {
+            "ge-0/0/0": {
+                "name": "ge-0/0/0", 
+                "subinterfaces": {
+                    "subinterface": {
+                        "0": {
+                            "index": "0", 
+                            "ipv4": {
+                                "config": {
+                                    "enabled": True
+                                }, 
+                                "addresses": {
+                                    "address": {
+                                        "192.168.0.30": {
+                                            "ip": "192.168.0.30", 
+                                            "config": {
+                                                "ip": "192.168.0.30", 
+                                                "prefix-length": 24
+                                            }
+                                        }
+                                    }
+                                }
+                            }, 
+                            "config": {
+                                "enabled": True, 
+                                "name": "0"
+                            }
+                        }
+                    }
+                }, 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": False
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "name": "ge-0/0/0"
+                }
+            }, 
+            "ge-0/0/1": {
+                "name": "ge-0/0/1", 
+                "subinterfaces": {
+                    "subinterface": {
+                        "0": {
+                            "index": "0", 
+                            "ipv4": {
+                                "config": {
+                                    "enabled": True
+                                }, 
+                                "addresses": {
+                                    "address": {
+                                        "172.16.0.30": {
+                                            "ip": "172.16.0.30", 
+                                            "config": {
+                                                "ip": "172.16.0.30", 
+                                                "prefix-length": 24
+                                            }
+                                        }
+                                    }
+                                }
+                            }, 
+                            "config": {
+                                "enabled": True, 
+                                "name": "0"
+                            }
+                        }
+                    }
+                }, 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": False
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "name": "ge-0/0/1"
+                }
+            }
+        }
+    }
+}

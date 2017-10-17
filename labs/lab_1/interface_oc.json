@@ -9,7 +9,7 @@
                             "index": "0", 
                             "ipv4": {
                                 "config": {
-                                    "enabled": true
+                                    "enabled": True
                                 }, 
                                 "addresses": {
                                     "address": {
@@ -24,7 +24,7 @@
                                 }
                             }, 
                             "config": {
-                                "enabled": true, 
+                                "enabled": True, 
                                 "name": "0"
                             }
                         }
@@ -33,13 +33,13 @@
                 "routed-vlan": {
                     "ipv4": {
                         "config": {
-                            "enabled": false
+                            "enabled": False
                         }
                     }
                 }, 
                 "config": {
                     "type": "ethernetCsmacd", 
-                    "enabled": true, 
+                    "enabled": True, 
                     "name": "ge-0/0/0"
                 }
             }

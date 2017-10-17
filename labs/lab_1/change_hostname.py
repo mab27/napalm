@@ -1,17 +1,19 @@
 from napalm_base import get_network_driver
 import pprint
+
 pp = pprint.PrettyPrinter(indent=4)
 
+# Create Device Object
 eos_driver = get_network_driver('eos')
 junos_driver = get_network_driver('junos')
 
-eos_configuration = {
+arista1 = {
 	'hostname': '192.168.0.70',
 	'username': 'admin',
 	'password': 'admin123',
 }
 
-junos_configuration = {
+vmx1 = {
 	'hostname': '192.168.0.30',
 	'username': 'mab',
 	'password': 'mab123',
@@ -26,7 +28,7 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**eos_configuration) as eos:
+with eos_driver(**arista1) as eos:
 	change_configuration(eos,'hostname lon.arista1')
 
 print('-'*60)
@@ -34,17 +36,16 @@ print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
 
-with junos_driver(**junos_configuration) as junos:
+with junos_driver(**vmx1) as junos:
 	change_configuration(junos,"system {host-name par.vmx1;}")
 
 print('-'*60)
 print('-'*60)
 
 
-
-device = junos_driver(hostname='192.168.0.30', username='mab', password='mab123')
-device.open()
-change_configuration(device,"system {host-name par.vmx2;}")
+#device = junos_driver(hostname='192.168.0.30', username='mab', password='mab123')
+#device.open()
+#change_configuration(device,"system {host-name par.vmx2;}")
 
 
 

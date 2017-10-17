@@ -1,0 +1,60 @@
+{
+    "interfaces": {
+        "interface": {
+            "Ethernet1": {
+                "name": "Ethernet1", 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": True
+                        }, 
+                        "addresses": {
+                            "address": {
+                                "172.16.0.70": {
+                                    "ip": "172.16.0.70", 
+                                    "config": {
+                                        "ip": "172.16.0.70", 
+                                        "prefix-length": 24, 
+                                        "secondary": False
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "mtu": 1500
+                }
+            }, 
+            "Management1": {
+                "name": "Management1", 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": True
+                        }, 
+                        "addresses": {
+                            "address": {
+                                "192.168.0.70": {
+                                    "ip": "192.168.0.70", 
+                                    "config": {
+                                        "ip": "192.168.0.70", 
+                                        "prefix-length": 24, 
+                                        "secondary": False
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "mtu": 1500
+                }
+            }
+        }
+    }
+}
