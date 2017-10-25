@@ -25,10 +25,10 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
+with eos_driver(**arista1) as arista1_device:
 	running_config = napalm_yang.base.Root()
 	running_config.add_model(napalm_yang.models.openconfig_interfaces)
-	running_config.parse_config(device=eos)
+	running_config.parse_config(device=arista1_device)
 
 print dumps(running_config.get(filter=True), indent=4)
 
@@ -36,9 +36,9 @@ print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
-with junos_driver(**vmx1) as junos:
+with junos_driver(**vmx1) as vmx1_device:
 	running_config = napalm_yang.base.Root()
 	running_config.add_model(napalm_yang.models.openconfig_interfaces)
-	running_config.parse_config(device=junos)
+	running_config.parse_config(device=vmx1_device)
 
 print dumps(running_config.get(filter=True), indent=4)

@@ -13,7 +13,6 @@ junos_device = {
 }
 
 with junos_driver(**junos_device) as d:
-#with junos_driver as d:
 	running_config = napalm_yang.base.Root()
 	running_config.add_model(napalm_yang.models.openconfig_interfaces)
 	running_config.parse_config(device=d)

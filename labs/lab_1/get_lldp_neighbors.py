@@ -24,29 +24,24 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
+with eos_driver(**arista1) as arista1_device:
 	print "Raw print: \n"
-	pp.pprint(eos.get_lldp_neighbors())
+	pp.pprint(arista1_device.get_lldp_neighbors())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(eos.get_lldp_neighbors(), indent=4)
-	#print "\n"
-	#print ('Facing device on Ethernet1 is : ' + eos.get_lldp_neighbors()['Ethernet1']['hostname']) 
-	#print "\n"
+	print dumps(arista1_device.get_lldp_neighbors(), indent=4)
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
-with junos_driver(**vmx1) as junos:
+with junos_driver(**vmx1) as vmx1_device:
 	print "Raw print: \n"
-	pp.pprint(junos.get_lldp_neighbors())
+	pp.pprint(vmx1_device.get_lldp_neighbors())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(junos.get_lldp_neighbors(), indent=4)
-	#print "\n"
-	#print ('Facing device on ge-0/0/0 is : ' + junos.get_lldp_neighbors()['ge-0/0/0']['hostname']) 
-	#print "\n"
+	print dumps(vmx1_device.get_lldp_neighbors(), indent=4)
+
 
 print('-'*60)
 print('-'*60)

@@ -46,9 +46,10 @@ s_junos=vmx1_variables.read()
 vmx1_variables.close()
 bgp_vars_vmx1=load(s_junos)
 
-def change_configuration(device, configuration):
+
+def change_configuration(device, filepath):
 	device.open()
-	device.load_merge_candidate(config=configuration)
+	device.load_merge_candidate(filename=filepath)
 	print(device.compare_config())
 	device.commit_config()
 
@@ -64,12 +65,9 @@ bgp_conf_arista1.close()
 
 
 # configuring the device
-with eos_driver(**arista1) as eos:
-	#file_path = '/home/mab/mab_automate/napalm/output/bgp_arista1.txt'
-	#change_configuration(eos, file_path)
-	with open('/home/mab/mab_automate/napalm/output/bgp_arista1.txt', "r") as config:
-		change_configuration(eos, config.read())
-
+with eos_driver(**arista1) as arista1_device:
+	filepath = '/home/mab/mab_automate/napalm/output/bgp_arista1.txt'
+	change_configuration(arista1_device, filepath)
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
@@ -82,13 +80,9 @@ bgp_conf_vmx1.write(bgp_template_vmx1.render(bgp_vars_vmx1))
 bgp_conf_vmx1.close()
 
 # configuring the device
-with junos_driver(**vmx1) as junos:
-	#file_path = "/home/mab/mab_automate/napalm/output/bgp_vmx1.txt"
-	#change_configuration(junos, "/home/mab/mab_automate/napalm/output/bgp_vmx1.txt")
-	with open('/home/mab/mab_automate/napalm/output/bgp_vmx1.txt', "r") as config:
-		print config.read()
-		change_configuration(junos, config.read())
-
+with junos_driver(**vmx1) as vmx1_device:
+	filepath = "/home/mab/mab_automate/napalm/output/bgp_vmx1.txt"
+	change_configuration(vmx1_device, filepath)
 
 print('-'*60)
 print('-'*60)

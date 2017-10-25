@@ -28,26 +28,19 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
-	change_configuration(eos,'hostname lon.arista1')
+with eos_driver(**arista1) as arista1_device:
+	change_configuration(arista1_device,'hostname arista1')
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
 
-with junos_driver(**vmx1) as junos:
-	change_configuration(junos,"system {host-name par.vmx1;}")
+with junos_driver(**vmx1) as vmx1_device:
+	change_configuration(vmx1_device,"system {host-name vmx1;}")
 
 print('-'*60)
 print('-'*60)
-
-
-#device = junos_driver(hostname='192.168.0.30', username='mab', password='mab123')
-#device.open()
-#change_configuration(device,"system {host-name par.vmx2;}")
-
-
 
 
 

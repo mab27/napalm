@@ -24,14 +24,14 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
+with eos_driver(**arista1) as arista1_device:
 	print "Raw print: \n"
-	pp.pprint(eos.get_interfaces())
+	pp.pprint(arista1_device.get_interfaces())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(eos.get_interfaces(), indent=4)
+	print dumps(arista1_device.get_interfaces(), indent=4)
 	print "\n"
-	print ('Interface Ethernet1 has MAC address : ' + eos.get_interfaces()['Ethernet1']['mac_address'])
+	print ('Interface Ethernet1 has MAC address : ' + arista1_device.get_interfaces()['Ethernet1']['mac_address'])
 	print "\n"
 
 
@@ -39,14 +39,14 @@ print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
-with junos_driver(**vmx1) as junos:
+with junos_driver(**vmx1) as vmx1_device:
 	print "Raw print: \n"
-	pp.pprint(junos.get_interfaces())
+	pp.pprint(vmx1_device.get_interfaces())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(junos.get_interfaces(), indent=4)
+	print dumps(vmx1_device.get_interfaces(), indent=4)
 	print "\n"
-	print ('Interface ge-0/0/0 has MAC address : ' + junos.get_interfaces()['ge-0/0/0']['mac_address'])
+	print ('Interface ge-0/0/0 has MAC address : ' + vmx1_device.get_interfaces()['ge-0/0/0']['mac_address'])
 	print "\n"
 
 print('-'*60)

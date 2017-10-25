@@ -24,28 +24,28 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
+with eos_driver(**arista1) as arista1_device:
 	print "Raw print: \n"
-	pp.pprint(eos.get_facts())
+	pp.pprint(arista1_device.get_facts())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(eos.get_facts(), indent=4)
+	print dumps(arista1_device.get_facts(), indent=4)
 	print"\n"
-	print ('This device is : ' + eos.get_facts()['vendor'] + ' ' + eos.get_facts()['model'])
+	print ('This device is : ' + arista1_device.get_facts()['vendor'] + ' ' + arista1_device.get_facts()['model'])
 
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
-with junos_driver(**vmx1) as junos:
+with junos_driver(**vmx1) as vmx1_device:
 	print "Raw print: \n"
-	pp.pprint(junos.get_facts())
+	pp.pprint(vmx1_device.get_facts())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(junos.get_facts(), indent=4)
+	print dumps(vmx1_device.get_facts(), indent=4)
 	print"\n"
-	print ('This device is : ' + junos.get_facts()['vendor'] + ' ' + junos.get_facts()['model'])
+	print ('This device is : ' + vmx1_device.get_facts()['vendor'] + ' ' + vmx1_device.get_facts()['model'])
 
 print('-'*60)
 print('-'*60)

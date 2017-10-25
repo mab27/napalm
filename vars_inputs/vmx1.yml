@@ -1,5 +1,5 @@
 ---
-loopback: 192.168.0.30
+loopback: 30.30.30.31
 local_asn: 65030
 neighbors:
   - name: aritsa1

@@ -24,30 +24,23 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
+with eos_driver(**arista1) as arista1_device:
 	print "Raw print: \n"
-	pp.pprint(eos.get_interfaces_ip())
+	pp.pprint(arista1_device.get_interfaces_ip())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(eos.get_interfaces_ip(), indent=4)
-	#print "\n"
-	#print ('Interface Ethernet1 has IP address : ' + eos.get_interfaces_ip()['Ethernet1']['ipv4'][0])
-	#print "\n"
-
+	print dumps(arista1_device.get_interfaces_ip(), indent=4)
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
-with junos_driver(**vmx1) as junos:
+with junos_driver(**vmx1) as vmx1_device:
 	print "Raw print: \n"
-	pp.pprint(junos.get_interfaces_ip())
+	pp.pprint(vmx1_device.get_interfaces_ip())
 	print "\n"
 	print "JSON dumps print: \n"
-	print dumps(junos.get_interfaces_ip(), indent=4)
-	#print "\n"
-	#print ('Interface ge-0/0/0 has IP address : ' + junos.get_interfaces_ip()['ge-0/0/0']['ipv4'][0])
-	#print "\n"
+	print dumps(vmx1_device.get_interfaces_ip(), indent=4)
 
 print('-'*60)
 print('-'*60)

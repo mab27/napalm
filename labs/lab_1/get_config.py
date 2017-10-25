@@ -24,15 +24,15 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
-	print dumps(eos.get_config()['running'], indent=4)
+with eos_driver(**arista1) as arista1_device:
+	print dumps(arista1_device.get_config()['running'], indent=4)
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
-with junos_driver(**vmx1) as junos:
-	print dumps(junos.get_config()['running'], indent=4)
+with junos_driver(**vmx1) as vmx1_device:
+	print dumps(vmx1_device.get_config()['running'], indent=4)
 
 print('-'*60)
 print('-'*60)

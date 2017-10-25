@@ -24,28 +24,24 @@ print('-'*60)
 print('-'*20+ " Arista EOS " + '-'*28)
 print('-'*60)
 
-with eos_driver(**arista1) as eos:
-	#print"Raw print: \n"
-	#pp.pprint(eos.get_bgp_neighbors())
+with eos_driver(**arista1) as arista1_device:
 	print"\n"
 	print"JSON dumps print: \n"
-	print dumps(eos.get_bgp_neighbors(), indent=4)
+	print dumps(arista1_device.get_bgp_neighbors(), indent=4)
 	print"\n"
-	print ('Uptime for neighbor 172.16.0.30 : ' + str(eos.get_bgp_neighbors()['global']['peers']['172.16.0.30']['uptime']))
+	print ('Uptime for neighbor 172.16.0.30 : ' + str(arista1_device.get_bgp_neighbors()['global']['peers']['172.16.0.30']['uptime']))
 	print"\n"
 
 print('-'*60)
 print('-'*20+ " Juniper JunOS " + '-'*25)
 print('-'*60)
 
-with junos_driver(**vmx1) as junos:
-	#print"Raw print: \n"
-	#pp.pprint(junos.get_bgp_neighbors())
+with junos_driver(**vmx1) as vmx1_device:
 	print"\n"
 	print"JSON dumps print: \n"
-	print dumps(junos.get_bgp_neighbors(), indent=4)
+	print dumps(vmx1_device.get_bgp_neighbors(), indent=4)
 	print"\n"
-	print ('Uptime for neighbor 172.16.0.70 : ' + str(junos.get_bgp_neighbors()['global']['peers']['172.16.0.70']['uptime']))
+	print ('Uptime for neighbor 172.16.0.70 : ' + str(vmx1_device.get_bgp_neighbors()['global']['peers']['172.16.0.70']['uptime']))
 	print"\n"
 
 print('-'*60)
