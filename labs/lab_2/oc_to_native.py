@@ -5,7 +5,7 @@ import napalm_yang
 from yaml import load
 from json import dumps
 
-# getting inventory in a python data structure. 
+# Getting inventory in a python data structure. 
 inventory_file =open('/home/mab/mab_automate/napalm/inventory/inventory.yml', 'r')
 inventory_structure =inventory_file.read()
 inventory_file.close()
@@ -38,18 +38,3 @@ for device_item in inventory:
 		print(conf.translate_config(device_connect.profile))
 	except:
 		print " Not able to reach the device \n"
-	
-"""
-	running_config = napalm_yang.base.Root()
-	running_config.add_model(napalm_yang.models.openconfig_interfaces)
-	try:
-		device_connect.open()
-		running_config.parse_config(device=device_connect)
-		print dumps(running_config.get(filter=True), indent=4)
-		print "\n"
-		device_connect.close()
-	except:
-		print " Not able to reach the device \n"
-
-
-"""

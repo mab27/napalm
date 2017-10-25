@@ -10,7 +10,7 @@ def change_configuration(device, filepath):
 	print(device.compare_config())
 	device.commit_config()
 
-# getting inventory in a python data structure. 
+# Getting inventory in a python data structure. 
 inventory_file =open('/home/mab/mab_automate/napalm/inventory/inventory.yml', 'r')
 inventory_structure =inventory_file.read()
 inventory_file.close()
@@ -27,7 +27,7 @@ for device_item in inventory:
 	password = inventory[device_item]['password']
 	driver = inventory[device_item]['driver']
 
-	# getting template
+	# Getting template
 	print ' - Getting template'
 	template_file=open('/home/mab/mab_automate/napalm/template_files/cfg_ebgp/' + driver + '.j2')
 	s=template_file.read()
@@ -36,16 +36,16 @@ for device_item in inventory:
 
 
 	try:
-		# getting variables
+		# Getting variables
 		print ' - Getting variables'
 		variables=open('/home/mab/mab_automate/napalm/vars_inputs/' + device_item + '.yml')
 		s=variables.read()
 		variables.close()
 		bgp_vars=load(s)
 
-		# rendering the template
+		# Rendering the template
 		print ' - Rendering bgp template'
-		bgp_conf=open('/home/mab/mab_automate/napalm/output/bgp_' + device_item + '.txt','w')
+		bgp_conf=open('/home/mab/mab_automate/napalm/render_files/bgp_' + device_item + '.txt','w')
 		bgp_conf.write(bgp_template.render(bgp_vars))
 		bgp_conf.close()
 		
@@ -54,10 +54,10 @@ for device_item in inventory:
 		device_driver = get_network_driver(driver)
 		device_connect = device_driver(hostname=mgmt_ip, username=username, password=password)
 
-		# configuring the device
+		# Configuring the device
 		print ' - Configuring Device'
 		try:
-			filepath = "/home/mab/mab_automate/napalm/output/bgp_" + device_item + ".txt"
+			filepath = "/home/mab/mab_automate/napalm/render_files/bgp_" + device_item + ".txt"
 			change_configuration(device_connect, filepath)
 		except:
 			print " Not able to reach the device \n"

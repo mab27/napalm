@@ -5,7 +5,7 @@ import napalm_yang
 from yaml import load
 from json import dumps
 
-# getting inventory in a python data structure. 
+# Getting inventory in a python data structure. 
 inventory_file =open('/home/mab/mab_automate/napalm/inventory/inventory.yml', 'r')
 inventory_structure =inventory_file.read()
 inventory_file.close()

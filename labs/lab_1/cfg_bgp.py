@@ -59,14 +59,14 @@ print('-'*60)
 
 # rendering the template
 print 'rendering bgp template'
-bgp_conf_arista1=open('/home/mab/mab_automate/napalm/output/bgp_arista1.txt','w')
+bgp_conf_arista1=open('/home/mab/mab_automate/napalm/render_files/bgp_arista1.txt','w')
 bgp_conf_arista1.write(bgp_template_arista1.render(bgp_vars_arista1))
 bgp_conf_arista1.close()
 
 
 # configuring the device
 with eos_driver(**arista1) as arista1_device:
-	filepath = '/home/mab/mab_automate/napalm/output/bgp_arista1.txt'
+	filepath = '/home/mab/mab_automate/napalm/render_files/bgp_arista1.txt'
 	change_configuration(arista1_device, filepath)
 
 print('-'*60)
@@ -75,13 +75,13 @@ print('-'*60)
 
 # rendering the template
 print 'rendering bgp template'
-bgp_conf_vmx1=open('/home/mab/mab_automate/napalm/output/bgp_vmx1.txt','w')
+bgp_conf_vmx1=open('/home/mab/mab_automate/napalm/render_files/bgp_vmx1.txt','w')
 bgp_conf_vmx1.write(bgp_template_vmx1.render(bgp_vars_vmx1))
 bgp_conf_vmx1.close()
 
 # configuring the device
 with junos_driver(**vmx1) as vmx1_device:
-	filepath = "/home/mab/mab_automate/napalm/output/bgp_vmx1.txt"
+	filepath = "/home/mab/mab_automate/napalm/render_files/bgp_vmx1.txt"
 	change_configuration(vmx1_device, filepath)
 
 print('-'*60)
