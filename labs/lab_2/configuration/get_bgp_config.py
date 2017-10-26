@@ -2,8 +2,11 @@ from napalm_base import get_network_driver
 from yaml import load
 from json import dumps
 
+# Path to folders 
+inventory_file_path = "/home/mab/mab_automate/napalm/inventory/inventory.yml"
+
 # Getting inventory in a python data structure. 
-inventory_file =open('/home/mab/mab_automate/napalm/inventory/inventory.yml', 'r')
+inventory_file =open(inventory_file_path, 'r')
 inventory_structure =inventory_file.read()
 inventory_file.close()
 inventory =load(inventory_structure)

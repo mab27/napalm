@@ -1,20 +1,14 @@
+from my_repo_functions import change_configuration
 from napalm_base import get_network_driver
 from jinja2 import Template
 from yaml import load
 import time
 
-
-def change_configuration(device, filepath):
-	device.open()
-	device.load_merge_candidate(filename=filepath)
-	print(device.compare_config())
-	device.commit_config()
-
 # Path to folders 
+inventory_file_path = "/home/mab/mab_automate/napalm/inventory/inventory.yml"
 path_template_files = "/home/mab/mab_automate/napalm/template_files/"
 path_vars_files = "/home/mab/mab_automate/napalm/vars_inputs/"
 path_render_files = "/home/mab/mab_automate/napalm/render_files/"
-inventory_file_path = "/home/mab/mab_automate/napalm/inventory/inventory.yml"
 
 # Getting inventory in a python data structure. 
 inventory_file =open(inventory_file_path, 'r')

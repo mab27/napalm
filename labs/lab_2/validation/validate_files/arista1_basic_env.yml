@@ -1,0 +1,10 @@
+---
+- get_facts:
+    os_version: 4.17
+
+- get_interfaces_ip:
+    Ethernet1:
+        ipv4:
+            172.16.0.70:
+                prefix_length: 24
+            _mode: strict

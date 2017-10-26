@@ -1,4 +1,0 @@
-router bgp 65070
-   neighbor 172.16.0.40 remote-as 65040
-   neighbor 172.16.0.40 description vmx2
-   neighbor 172.16.0.40 maximum-routes 12000

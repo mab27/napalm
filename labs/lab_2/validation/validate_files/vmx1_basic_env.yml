@@ -1,0 +1,10 @@
+---
+- get_facts:
+    os_version: 14.1R4.9
+
+- get_interfaces_ip:
+    ge-0/0/1.0:
+        ipv4:
+            172.16.0.30:
+                prefix_length: 24
+            _mode: strict

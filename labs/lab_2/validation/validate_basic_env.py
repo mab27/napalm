@@ -1,15 +1,10 @@
-### Parse native configuration and return and OpenConfig object
-
 from napalm_base import get_network_driver
-import napalm_yang
 from yaml import load
-from json import dumps
+import pprint
 
-# Path to folders 
-inventory_file_path = "/home/mab/mab_automate/napalm/inventory/inventory.yml"
 
 # Getting inventory in a python data structure. 
-inventory_file =open(inventory_file_path, 'r')
+inventory_file =open('/home/mab/mab_automate/napalm/inventory/inventory.yml', 'r')
 inventory_structure =inventory_file.read()
 inventory_file.close()
 inventory =load(inventory_structure)
@@ -25,17 +20,16 @@ for device_item in inventory:
 	password = inventory[device_item]['password']
 	driver = inventory[device_item]['driver']
 
+	validate_file_path = "validate_files/" + device_item + "_basic_env.yml"
+
 	# Create Device Object
 	device_driver = get_network_driver(driver)
 	device_connect = device_driver(hostname=mgmt_ip, username=username, password=password)
 
-	running_config = napalm_yang.base.Root()
-	running_config.add_model(napalm_yang.models.openconfig_interfaces)
 	try:
+		print " Validation file : " + validate_file_path
 		device_connect.open()
-		running_config.parse_config(device=device_connect)
-		print dumps(running_config.get(filter=True), indent=4)
-		print "\n"
+		pprint.pprint(device_connect.compliance_report(validate_file_path))
 		device_connect.close()
 	except:
 		print " Not able to reach the device \n"

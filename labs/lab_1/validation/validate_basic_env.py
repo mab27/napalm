@@ -18,8 +18,8 @@ vmx1 = {
 }
 
 
-arista1_validate_file_path = "/home/mab/mab_automate/napalm/labs/validation/validate_files/arista1_basic_env.yml"
-vmx1_validate_file_path = "/home/mab/mab_automate/napalm/labs/validation/validate_files/vmx1_basic_env.yml"
+arista1_validate_file_path = "validate_files/arista1_basic_env.yml"
+vmx1_validate_file_path = "validate_files/vmx1_basic_env.yml"
 
 
 # Validating the device state
