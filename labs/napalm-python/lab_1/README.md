@@ -1684,5 +1684,226 @@ Device : vmx1
                                                       u'nested': True}}},
  u'skipped': []}
 mab@mab-infra:~$ 
+```
+
+## openconfig:
+
+- native_to_openconfig:
 
 ```
+mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/native_to_oc.py 
+------------------------------------------------------------
+Device : arista1
+------------------------------------------------------------
+No handlers could be found for logger "napalm-yang"
+{
+    "interfaces": {
+        "interface": {
+            "Ethernet1": {
+                "name": "Ethernet1", 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": True
+                        }, 
+                        "addresses": {
+                            "address": {
+                                "172.16.0.70": {
+                                    "ip": "172.16.0.70", 
+                                    "config": {
+                                        "ip": "172.16.0.70", 
+                                        "prefix-length": 24, 
+                                        "secondary": False
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "mtu": 1500
+                }
+            }, 
+            "Management1": {
+                "name": "Management1", 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": True
+                        }, 
+                        "addresses": {
+                            "address": {
+                                "192.168.0.70": {
+                                    "ip": "192.168.0.70", 
+                                    "config": {
+                                        "ip": "192.168.0.70", 
+                                        "prefix-length": 24, 
+                                        "secondary": False
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "mtu": 1500
+                }
+            }
+        }
+    }
+}
+------------------------------------------------------------
+Device : vmx1
+------------------------------------------------------------
+{
+    "interfaces": {
+        "interface": {
+            "ge-0/0/0": {
+                "name": "ge-0/0/0", 
+                "subinterfaces": {
+                    "subinterface": {
+                        "0": {
+                            "index": "0", 
+                            "ipv4": {
+                                "config": {
+                                    "enabled": True
+                                }, 
+                                "addresses": {
+                                    "address": {
+                                        "192.168.0.30": {
+                                            "ip": "192.168.0.30", 
+                                            "config": {
+                                                "ip": "192.168.0.30", 
+                                                "prefix-length": 24
+                                            }
+                                        }
+                                    }
+                                }
+                            }, 
+                            "config": {
+                                "enabled": True, 
+                                "name": "0"
+                            }
+                        }
+                    }
+                }, 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": False
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "name": "ge-0/0/0"
+                }
+            }, 
+            "ge-0/0/1": {
+                "name": "ge-0/0/1", 
+                "subinterfaces": {
+                    "subinterface": {
+                        "0": {
+                            "index": "0", 
+                            "ipv4": {
+                                "config": {
+                                    "enabled": True
+                                }, 
+                                "addresses": {
+                                    "address": {
+                                        "172.16.0.30": {
+                                            "ip": "172.16.0.30", 
+                                            "config": {
+                                                "ip": "172.16.0.30", 
+                                                "prefix-length": 24
+                                            }
+                                        }
+                                    }
+                                }
+                            }, 
+                            "config": {
+                                "enabled": True, 
+                                "name": "0"
+                            }
+                        }
+                    }
+                }, 
+                "routed-vlan": {
+                    "ipv4": {
+                        "config": {
+                            "enabled": False
+                        }
+                    }
+                }, 
+                "config": {
+                    "type": "ethernetCsmacd", 
+                    "enabled": True, 
+                    "name": "ge-0/0/1"
+                }
+            }
+        }
+    }
+}
+mab@mab-infra:~$
+```
+
+- openconfig_to_native:
+
+```
+mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/oc_to_native.py 
+------------------------------------------------------------
+Device : arista1
+------------------------------------------------------------
+No handlers could be found for logger "napalm-yang"
+interface Management1
+    ip address 192.168.0.70/24 
+    mtu 1500
+    exit
+interface Ethernet1
+    no switchport
+    ip address 172.16.0.70/24 
+    mtu 1500
+    exit
+
+------------------------------------------------------------
+Device : vmx1
+------------------------------------------------------------
+<configuration>
+  <interfaces>
+    <interface>
+      <name>ge-0/0/1</name>
+      <unit>
+        <name>0</name>
+        <family>
+          <inet>
+            <address>
+              <name>172.16.0.30/24</name>
+            </address>
+          </inet>
+        </family>
+      </unit>
+    </interface>
+    <interface>
+      <name>ge-0/0/0</name>
+      <unit>
+        <name>0</name>
+        <family>
+          <inet>
+            <address>
+              <name>192.168.0.30/24</name>
+            </address>
+          </inet>
+        </family>
+      </unit>
+    </interface>
+  </interfaces>
+</configuration>
+
+mab@mab-infra:~$ 
+```
+
