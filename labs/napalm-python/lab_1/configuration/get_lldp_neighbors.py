@@ -21,7 +21,7 @@ vmx1 = {
 }
 
 print('-'*60)
-print('-'*20+ " Arista EOS " + '-'*28)
+print ('Device : ' + 'arista1')
 print('-'*60)
 
 with eos_driver(**arista1) as arista1_device:
@@ -32,7 +32,7 @@ with eos_driver(**arista1) as arista1_device:
 	print dumps(arista1_device.get_lldp_neighbors(), indent=4)
 
 print('-'*60)
-print('-'*20+ " Juniper JunOS " + '-'*25)
+print ('Device : ' + 'vmx1')
 print('-'*60)
 
 with junos_driver(**vmx1) as vmx1_device:

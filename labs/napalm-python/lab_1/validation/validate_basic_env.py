@@ -17,14 +17,15 @@ vmx1 = {
 	'password': 'mab123',
 }
 
+path_validate_files = "/home/mab/mab_automate/napalm/labs/napalm-python/lab_1/validation/validate_files/"
 
-arista1_validate_file_path = "validate_files/arista1_basic_env.yml"
-vmx1_validate_file_path = "validate_files/vmx1_basic_env.yml"
+arista1_validate_file_path = path_validate_files + "arista1_basic_env.yml"
+vmx1_validate_file_path = path_validate_files + "vmx1_basic_env.yml"
 
 
 # Validating the device state
 print('-'*60)
-print('-'*20+ " Arista EOS " + '-'*28)
+print ('Device : ' + 'arista1')
 print('-'*60)
 
 with eos_driver(**arista1) as arista1_device:
@@ -32,7 +33,7 @@ with eos_driver(**arista1) as arista1_device:
 
 # Validating the device state
 print('-'*60)
-print('-'*20+ " Juniper JunOS " + '-'*25)
+print ('Device : ' + 'vmx1')
 print('-'*60)
 
 with junos_driver(**vmx1) as vmx1_device:

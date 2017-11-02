@@ -25,14 +25,14 @@ def change_configuration(device, configuration):
 	device.commit_config()
 
 print('-'*60)
-print('-'*20+ " Arista EOS " + '-'*28)
+print ('Device : ' + 'arista1')
 print('-'*60)
 
 with eos_driver(**arista1) as arista1_device:
 	change_configuration(arista1_device,'hostname arista1')
 
 print('-'*60)
-print('-'*20+ " Juniper JunOS " + '-'*25)
+print ('Device : ' + 'vmx1')
 print('-'*60)
 
 

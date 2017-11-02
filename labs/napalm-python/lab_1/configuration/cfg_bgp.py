@@ -62,7 +62,7 @@ def change_configuration(device, filepath):
 	device.commit_config()
 
 print('-'*60)
-print('-'*20+ " Arista EOS " + '-'*28)
+print ('Device : ' + 'arista1')
 print('-'*60)
 
 # Rendering the template
@@ -79,7 +79,7 @@ with eos_driver(**arista1) as arista1_device:
 	change_configuration(arista1_device, filepath)
 
 print('-'*60)
-print('-'*20+ " Juniper JunOS " + '-'*25)
+print ('Device : ' + 'vmx1')
 print('-'*60)
 
 # Rendering the template

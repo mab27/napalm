@@ -1,5 +1,5 @@
 ---
-loopback: 70.70.70.71
+loopback: 70.70.70.70
 local_asn: 65070
 neighbors:
   - name: aritsa2

@@ -26,7 +26,7 @@ protocols {
     }
 }
 routing-options {
-    router-id 30.30.30.31;
+    router-id 30.30.30.30;
     forwarding-table {
         export bgp-ecmp;
     }
