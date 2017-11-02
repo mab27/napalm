@@ -1,0 +1,11 @@
+[vendors-all:children]
+arista 
+juniper
+
+[arista]
+arista1 ip=192.168.0.70
+arista2 ip=192.168.0.80
+
+[juniper]
+vmx1 ip=192.168.0.30
+vmx2 ip=192.168.0.40

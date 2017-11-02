@@ -24,7 +24,7 @@ vmx1 = {
 
 # Paths to folders
 path_template_files = "/home/mab/mab_automate/napalm/template_files/"
-path_vars_files = "/home/mab/mab_automate/napalm/vars_inputs/"
+path_vars_files = "/home/mab/mab_automate/napalm/host_vars/"
 path_render_files = "/home/mab/mab_automate/napalm/render_files/"
 
 # Getting template

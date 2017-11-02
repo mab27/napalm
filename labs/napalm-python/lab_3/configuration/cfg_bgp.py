@@ -7,7 +7,7 @@ import time
 # Path to folders 
 inventory_file_path = "/home/mab/mab_automate/napalm/inventory/inventory.yml"
 path_template_files = "/home/mab/mab_automate/napalm/template_files/"
-path_vars_files = "/home/mab/mab_automate/napalm/vars_inputs/"
+path_vars_files = "/home/mab/mab_automate/napalm/host_vars/"
 path_render_files = "/home/mab/mab_automate/napalm/render_files/"
 
 # Getting inventory in a python data structure. 
