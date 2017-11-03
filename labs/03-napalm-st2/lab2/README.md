@@ -31,6 +31,86 @@ end_timestamp: 2017-11-03T12:52:28.287761Z
 | 59fc66757cae22068a51a90b | succeeded (2s elapsed) | get_facts     | napalm.get_facts   | Fri, 03 Nov 2017 12:52:05 UTC |
 +--------------------------+------------------------+---------------+--------------------+-------------------------------+
 mab@mab-infra:/opt/stackstorm/packs/napalm/actions$ 
+mab@mab-infra:/opt/stackstorm/packs/napalm/actions$ st2 execution get 59fc66757cae22068a51a909
+id: 59fc66757cae22068a51a909
+status: succeeded (6s elapsed)
+parameters: 
+  hostname: vmx1
+result: 
+  exit_code: 0
+  result:
+    raw:
+      fqdn: vmx1
+      hostname: vmx1
+      interface_list:
+      - ge-0/0/0
+      - lc-0/0/0
+      - pfe-0/0/0
+      - pfh-0/0/0
+      - ge-0/0/1
+      - ge-0/0/2
+      - ge-0/0/3
+      - ge-0/0/4
+      - ge-0/0/5
+      - ge-0/0/6
+      - ge-0/0/7
+      - ge-0/0/8
+      - ge-0/0/9
+      - .local.
+      - cbp0
+      - demux0
+      - dsc
+      - em1
+      - em2
+      - em3
+      - em4
+      - em5
+      - em6
+      - em7
+      - em8
+      - em9
+      - fxp0
+      - gre
+      - ipip
+      - irb
+      - lo0
+      - lsi
+      - mtun
+      - pimd
+      - pime
+      - pip0
+      - pp0
+      - tap
+      - vtep
+      model: VMX
+      os_version: 14.1R4.9
+      serial_number: VM55E771B3CD
+      uptime: 18473
+      vendor: Juniper
+  stderr: ''
+  stdout: ''
+mab@mab-infra:/opt/stackstorm/packs/napalm/actions$ st2 execution get 59fc66757cae22068a51a90b
+id: 59fc66757cae22068a51a90b
+status: succeeded (2s elapsed)
+parameters: 
+  hostname: arista1
+result: 
+  exit_code: 0
+  result:
+    raw:
+      fqdn: arista1
+      hostname: arista1
+      interface_list:
+      - Ethernet1
+      - Management1
+      model: vEOS
+      os_version: 4.18.1F-4591672.4181F
+      serial_number: ''
+      uptime: 11069
+      vendor: Arista
+  stderr: ''
+  stdout: ''
+mab@mab-infra:/opt/stackstorm/packs/napalm/actions$ 
 ```
 
 ```
