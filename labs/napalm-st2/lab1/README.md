@@ -1,7 +1,8 @@
 # Lab1
 
 ## Overview:
-- Simple python files. All information included in the files.
+- Invoking standard actions from the NAPALM pack.
+- Contains both getters (show commands) and setters (configuration commands)
 
 ## Getters (show commands):
 

@@ -1,0 +1,40 @@
+---
+  version: '2.0'
+  name: napalm.get_facts_all
+  description: Get the various facts from a list of devices
+  workflows:
+
+    main:
+      type: direct
+      input:
+      - device_list
+
+      tasks:
+
+        get_inventory:
+          action: "napalm.file_to_obj"
+          input:
+            file_location: <% $.device_list %>
+          publish:
+            inventory: <% task(get_inventory).result.result %>
+          on-success:
+            - get_facts_all
+
+        get_facts_all:
+          with-items: device in <% list($.inventory.keys()) %>
+          workflow: get_facts_unitary
+          input:
+            hostname: <% $.device %>
+
+
+    get_facts_unitary:
+      type: direct
+      input:
+        - hostname
+
+      tasks:
+
+        get_facts:  
+          action: "napalm.get_facts"
+          input:
+            hostname: <% $.hostname %>
