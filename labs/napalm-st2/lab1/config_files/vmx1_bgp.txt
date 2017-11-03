@@ -1,0 +1,19 @@
+protocols {
+    bgp {
+        group underlay {
+            type external;
+            import bgp-in;
+            export bgp-out;
+            local-as 65030;
+            multipath multiple-as;
+            neighbor 172.16.0.70 {
+                description arista1;
+                peer-as 65070;
+            }
+        }
+    }
+    lldp {
+        interface all;
+        interface ge-0/0/0;
+    }
+}
