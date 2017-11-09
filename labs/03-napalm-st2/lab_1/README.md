@@ -4,7 +4,7 @@
 - Invoking standard actions from the NAPALM pack.
 - Sections:
     - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab1#getters-show-commands)
-    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab1#setters-configuratio-commands)
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab1#setters-configuration-commands)
 
 ## Getters (show commands):
 
