@@ -2,7 +2,9 @@
 
 ## Overview:
 - Invoking standard actions from the NAPALM pack.
-- Contains both getters (show commands) and setters (configuration commands)
+- Sections:
+    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab1#getters-show-commands)
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab1#setters-configuratio-commands)
 
 ## Getters (show commands):
 
@@ -1261,7 +1263,7 @@ result:
 mab@mab-infra:/opt/stackstorm/packs
 ```
 
-## Setters (configuratio commands):
+## Setters (configuration commands):
 ```
 mab@mab-infra:/opt/stackstorm/packs$ cat ~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/arista1_bgp.txt 
 router bgp 65070

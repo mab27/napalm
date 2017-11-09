@@ -3,6 +3,9 @@
 ## Overview:
 - Writing custom workflows based on standard actions from the NAPALM pack.
 - Goal is to iterate againse the list of device in the inveotry list
+- Sections:
+    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab2#getters-show-commands)
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab2#setters-configuration-commands)
 
 ## Getters (show commands):
 
@@ -254,6 +257,96 @@ end_timestamp: 2017-11-09T18:57:10.364035Z
 | 5a04a4de7cae22371c88a7b1 | succeeded (2s elapsed) | audit_config  | napalm.get_bgp_neighbors | Thu, 09 Nov 2017 18:56:30 UTC |
 | 5a04a4e47cae22371c88a7b4 | succeeded (0s elapsed) | end_task      | core.noop                | Thu, 09 Nov 2017 18:56:36 UTC |
 +--------------------------+------------------------+---------------+--------------------------+-------------------------------+
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 execution get 5a04a4c37cae22371c88a7a0
+id: 5a04a4c37cae22371c88a7a0
+status: succeeded (3s elapsed)
+parameters: 
+  path_to_render: /home/mab/mab_automate/napalm/render_files/cfg_ebgp/vmx1.txt
+  path_to_template: /home/mab/mab_automate/napalm/template_files/cfg_ebgp/junos.j2
+  path_to_variables: /home/mab/mab_automate/napalm/host_vars/vmx1.yml
+result: 
+  exit_code: 0
+  result: null
+  stderr: ''
+  stdout: " - Getting template\n - Getting variables\n - Rendering bgp template\n - Rendered file\n"
+mab@mab-infra:~$
+mab@mab-infra:~$
+mab@mab-infra:~$ st2 execution get 5a04a4c77cae22371c88a7aa
+id: 5a04a4c77cae22371c88a7aa
+status: succeeded (6s elapsed)
+parameters: 
+  config_file: /home/mab/mab_automate/napalm/render_files/cfg_ebgp/vmx1.txt
+  hostname: vmx1
+result: 
+  exit_code: 0
+  result: load (merge) successful on vmx1
+  stderr: ''
+  stdout: ''
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 execution get 5a04a4de7cae22371c88a7af
+id: 5a04a4de7cae22371c88a7af
+status: succeeded (4s elapsed)
+parameters: 
+  hostname: vmx1
+result: 
+  exit_code: 0
+  result:
+    raw:
+      172.16.0.40:
+        address_family:
+          ipv4:
+            accepted_prefixes: -1
+            received_prefixes: -1
+            sent_prefixes: -1
+          ipv6:
+            accepted_prefixes: -1
+            received_prefixes: -1
+            sent_prefixes: -1
+        description: vmx2
+        is_enabled: true
+        is_up: false
+        local_as: 65030
+        remote_as: 65040
+        remote_id: ''
+        uptime: 6347
+      172.16.0.70:
+        address_family:
+          ipv4:
+            accepted_prefixes: 0
+            received_prefixes: 0
+            sent_prefixes: 2
+          ipv6:
+            accepted_prefixes: -1
+            received_prefixes: -1
+            sent_prefixes: -1
+        description: aritsa1
+        is_enabled: true
+        is_up: true
+        local_as: 65030
+        remote_as: 65070
+        remote_id: 70.70.70.70
+        uptime: 6367
+      172.16.0.80:
+        address_family:
+          ipv4:
+            accepted_prefixes: -1
+            received_prefixes: -1
+            sent_prefixes: -1
+          ipv6:
+            accepted_prefixes: -1
+            received_prefixes: -1
+            sent_prefixes: -1
+        description: aritsa2
+        is_enabled: true
+        is_up: false
+        local_as: 65030
+        remote_as: 65080
+        remote_id: ''
+        uptime: 6347
+  stderr: ''
+  stdout: ''
+mab@mab-infra:~$ 
 ```
 
 ## Validation:

@@ -2,6 +2,11 @@
 
 ## Overview:
 - Simple python files. All information included in the files.
+- Sections:
+    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#getters-show-commands)
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#setters-configuration-commands)
+    - [Validation](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#validation)
+    - [Openconfig](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#openconfig)
 
 ## Getters (show commands):
 
