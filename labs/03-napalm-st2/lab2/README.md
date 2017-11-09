@@ -113,10 +113,57 @@ result:
 mab@mab-infra:/opt/stackstorm/packs/napalm/actions$ 
 ```
 
+- get_bgp_confg:
 ```
+mab@mab-infra:/opt/stackstorm/packs/napalm/actions$ st2 run napalm.get_bgp_config_all
+..............
+id: 5a01cc7a7cae2207542f0684
+action.ref: napalm.get_bgp_config_all
+parameters: None
+status: failed
+result_task: get_bgp_config_all
+result: - result: "Failure caused by error in tasks: get_bgp_config\n\n  get_bgp_config [task_ex_id=09ddb702-1bfe-465f-865d-f752586a6a4e] -> {result: None, exit_code: 1, stderr: Traceback (most recent call last):\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\n    obj.run()\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\n    output = action.run(**self._parameters)\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_config.py\", line 10, in run\\n    with self.get_driver(**std_kwargs) as device:\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\n    self.open()\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_junos/junos.py\", line 109, in open\\n    raise ConnectionException(cte.message)\\nnapalm_base.exceptions.ConnectionException\\n, stdout: }\n    [action_ex_id=de0d559c-8ad6-4212-b9f1-863e03b57f7f, idx=0]: {u'stdout': u'', u'result': u'None', u'stderr': u'Traceback (most recent call last):\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\\\n    obj.run()\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\\\n    output = action.run(**self._parameters)\\\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_config.py\", line 10, in run\\\\n    with self.get_driver(**std_kwargs) as device:\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\\\n    self.open()\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_junos/junos.py\", line 109, in open\\\\n    raise ConnectionException(cte.message)\\\\nnapalm_base.exceptions.ConnectionException\\\\n', u'exit_code': 1}\n"
+- {}
+- result: "Failure caused by error in tasks: get_bgp_config\n\n  get_bgp_config [task_ex_id=0717a216-9d6d-4969-acfd-cac2973b4978] -> {result: None, exit_code: 1, stderr: No handlers could be found for logger \"pyeapi.eapilib\"\\nTraceback (most recent call last):\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\n    obj.run()\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\n    output = action.run(**self._parameters)\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_config.py\", line 10, in run\\n    with self.get_driver(**std_kwargs) as device:\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\n    self.open()\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_eos/eos.py\", line 118, in open\\n    raise ConnectionException(ce.message)\\nnapalm_base.exceptions.ConnectionException: Socket error during eAPI connection: [Errno 113] No route to host\\n, stdout: }\n    [action_ex_id=a38d507d-db8b-4ebe-83e8-6cf6a3b4291c, idx=0]: {u'stdout': u'', u'result': u'None', u'stderr': u'No handlers could be found for logger \"pyeapi.eapilib\"\\\\nTraceback (most recent call last):\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\\\n    obj.run()\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\\\n    output = action.run(**self._parameters)\\\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_config.py\", line 10, in run\\\\n    with self.get_driver(**std_kwargs) as device:\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\\\n    self.open()\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_eos/eos.py\", line 118, in open\\\\n    raise ConnectionException(ce.message)\\\\nnapalm_base.exceptions.ConnectionException: Socket error during eAPI connection: [Errno 113] No route to host\\\\n', u'exit_code': 1}\n"
+- {}
+start_timestamp: 2017-11-07T15:08:42.892104Z
+end_timestamp: 2017-11-07T15:09:09.904208Z
++--------------------------+------------------------+----------------+-----------------------+-------------------------------+
+| id                       | status                 | task           | action                | start_timestamp               |
++--------------------------+------------------------+----------------+-----------------------+-------------------------------+
+| 5a01cc7b7cae2207542f0687 | succeeded (1s elapsed) | get_inventory  | napalm.file_to_obj    | Tue, 07 Nov 2017 15:08:43 UTC |
+| 5a01cc7d7cae2207542f068e | failed (5s elapsed)    | get_bgp_config | napalm.get_bgp_config | Tue, 07 Nov 2017 15:08:45 UTC |
+| 5a01cc7d7cae2207542f068d | failed (5s elapsed)    | get_bgp_config | napalm.get_bgp_config | Tue, 07 Nov 2017 15:08:45 UTC |
+| 5a01cc7d7cae2207542f068c | succeeded (3s elapsed) | get_bgp_config | napalm.get_bgp_config | Tue, 07 Nov 2017 15:08:45 UTC |
+| 5a01cc7d7cae2207542f068f | succeeded (3s elapsed) | get_bgp_config | napalm.get_bgp_config | Tue, 07 Nov 2017 15:08:45 UTC |
++--------------------------+------------------------+----------------+-----------------------+-------------------------------+
 ```
 
+- get_bgp_neighbors:
 ```
+mab@mab-infra:/opt/stackstorm/packs/napalm/actions$ st2 run napalm.get_bgp_neighbors_all
+............
+id: 5a01cdf07cae2207542f0692
+action.ref: napalm.get_bgp_neighbors_all
+parameters: None
+status: failed
+result_task: get_bgp_neighbors_all
+result: - result: "Failure caused by error in tasks: get_bgp_neighbors\n\n  get_bgp_neighbors [task_ex_id=9e7b473e-9cde-4646-997f-c89483d232ea] -> {result: None, exit_code: 1, stderr: Traceback (most recent call last):\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\n    obj.run()\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\n    output = action.run(**self._parameters)\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_neighbors.py\", line 10, in run\\n    with self.get_driver(**std_kwargs) as device:\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\n    self.open()\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_junos/junos.py\", line 109, in open\\n    raise ConnectionException(cte.message)\\nnapalm_base.exceptions.ConnectionException\\n, stdout: }\n    [action_ex_id=75da3140-666d-4488-a648-343bbcefe08f, idx=0]: {u'stdout': u'', u'result': u'None', u'stderr': u'Traceback (most recent call last):\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\\\n    obj.run()\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\\\n    output = action.run(**self._parameters)\\\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_neighbors.py\", line 10, in run\\\\n    with self.get_driver(**std_kwargs) as device:\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\\\n    self.open()\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_junos/junos.py\", line 109, in open\\\\n    raise ConnectionException(cte.message)\\\\nnapalm_base.exceptions.ConnectionException\\\\n', u'exit_code': 1}\n"
+- {}
+- result: "Failure caused by error in tasks: get_bgp_neighbors\n\n  get_bgp_neighbors [task_ex_id=dc560cb2-05f7-4c57-b044-549a90ab6a51] -> {result: None, exit_code: 1, stderr: No handlers could be found for logger \"pyeapi.eapilib\"\\nTraceback (most recent call last):\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\n    obj.run()\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\n    output = action.run(**self._parameters)\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_neighbors.py\", line 10, in run\\n    with self.get_driver(**std_kwargs) as device:\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\n    self.open()\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_eos/eos.py\", line 118, in open\\n    raise ConnectionException(ce.message)\\nnapalm_base.exceptions.ConnectionException: Socket error during eAPI connection: [Errno 113] No route to host\\n, stdout: }\n    [action_ex_id=5be6dfda-a140-47be-894a-6cdcbc2f4928, idx=0]: {u'stdout': u'', u'result': u'None', u'stderr': u'No handlers could be found for logger \"pyeapi.eapilib\"\\\\nTraceback (most recent call last):\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 259, in <module>\\\\n    obj.run()\\\\n  File \"/opt/stackstorm/st2/local/lib/python2.7/site-packages/st2common/runners/python_action_wrapper.py\", line 155, in run\\\\n    output = action.run(**self._parameters)\\\\n  File \"/opt/stackstorm/packs/napalm/actions/get_bgp_neighbors.py\", line 10, in run\\\\n    with self.get_driver(**std_kwargs) as device:\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_base/base.py\", line 47, in __enter__\\\\n    self.open()\\\\n  File \"/opt/stackstorm/virtualenvs/napalm/lib/python2.7/site-packages/napalm_eos/eos.py\", line 118, in open\\\\n    raise ConnectionException(ce.message)\\\\nnapalm_base.exceptions.ConnectionException: Socket error during eAPI connection: [Errno 113] No route to host\\\\n', u'exit_code': 1}\n"
+- {}
+start_timestamp: 2017-11-07T15:14:56.801053Z
+end_timestamp: 2017-11-07T15:15:19.824735Z
++--------------------------+------------------------+-------------------+--------------------------+-------------------------------+
+| id                       | status                 | task              | action                   | start_timestamp               |
++--------------------------+------------------------+-------------------+--------------------------+-------------------------------+
+| 5a01cdf17cae2207542f0695 | succeeded (2s elapsed) | get_inventory     | napalm.file_to_obj       | Tue, 07 Nov 2017 15:14:57 UTC |
+| 5a01cdf37cae2207542f069a | failed (5s elapsed)    | get_bgp_neighbors | napalm.get_bgp_neighbors | Tue, 07 Nov 2017 15:14:59 UTC |
+| 5a01cdf37cae2207542f069c | failed (6s elapsed)    | get_bgp_neighbors | napalm.get_bgp_neighbors | Tue, 07 Nov 2017 15:14:59 UTC |
+| 5a01cdf37cae2207542f069b | succeeded (3s elapsed) | get_bgp_neighbors | napalm.get_bgp_neighbors | Tue, 07 Nov 2017 15:14:59 UTC |
+| 5a01cdf37cae2207542f069d | succeeded (3s elapsed) | get_bgp_neighbors | napalm.get_bgp_neighbors | Tue, 07 Nov 2017 15:14:59 UTC |
++--------------------------+------------------------+-------------------+--------------------------+-------------------------------+
+mab@mab-infra:/opt/stackstorm/packs/napalm/actions$
 ```
 
 ```
@@ -130,6 +177,7 @@ mab@mab-infra:/opt/stackstorm/packs/napalm/actions$
 
 ## Setters (configuration commands):
 
+- cfg_bgp:
 ```
 ```
 

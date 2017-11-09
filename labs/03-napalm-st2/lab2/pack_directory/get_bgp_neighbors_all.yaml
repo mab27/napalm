@@ -1,0 +1,17 @@
+---
+name: "get_bgp_neighbors_all"
+pack: "napalm"
+runner_type: "mistral-v2"
+description: "Get the BGP neighbors from a list of devices"
+enabled: true
+entry_point: "workflows/get_bgp_neighbors_all.yaml"
+parameters:
+    device_list:
+      required: true
+      description: "Hostnames of the devices"
+      type: string
+      default: "home/mab/mab_automate/napalm/inventory/inventory.yml"
+    workflow:
+      default: napalm.get_bgp_neighbors_all.main
+      immutable: true
+      type: string
