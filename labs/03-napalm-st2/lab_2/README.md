@@ -4,8 +4,8 @@
 - Writing custom workflows based on standard actions from the NAPALM pack.
 - Goal is to iterate againse the list of device in the inveotry list
 - Sections:
-    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab2#getters-show-commands)
-    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab2#setters-configuration-commands)
+    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab_2#getters-show-commands)
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab_2#setters-configuration-commands)
 
 ## Getters (show commands):
 
