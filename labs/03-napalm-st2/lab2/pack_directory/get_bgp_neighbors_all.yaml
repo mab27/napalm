@@ -11,7 +11,3 @@ parameters:
       description: "Hostnames of the devices"
       type: string
       default: "home/mab/mab_automate/napalm/inventory/inventory.yml"
-    workflow:
-      default: napalm.get_bgp_neighbors_all.main
-      immutable: true
-      type: string

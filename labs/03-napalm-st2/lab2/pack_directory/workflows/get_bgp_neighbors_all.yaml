@@ -1,40 +1,31 @@
 ---
   version: '2.0'
-  name: napalm.get_bgp_neighbors_all
-  description: Get the BGP neighbors from a list of devices
-  workflows:
 
-    main:
-      type: direct
-      input:
+  napalm.get_bgp_neighbors_all:
+
+    input:
       - device_list
 
-      tasks:
+    type: direct
 
-        get_inventory:
-          action: "napalm.file_to_obj"
-          input:
-            file_location: <% $.device_list %>
-          publish:
-            inventory: <% task(get_inventory).result.result %>
-          on-success:
-            - get_bgp_neighbors_all
+    tasks:
 
-        get_bgp_neighbors_all:
-          with-items: device in <% list($.inventory.keys()) %>
-          workflow: get_bgp_neighbors_unitary
-          input:
-            hostname: <% $.device %>
+      get_inventory:
+        action: "napalm.file_to_obj"
+        input:
+          file_location: <% $.device_list %>
+        publish:
+          inventory: <% task(get_inventory).result.result %>
+        on-success:
+          - get_bgp_neighbors
 
+      get_bgp_neighbors:
+        with-items: device in <% list($.inventory.keys()) %>
+        action: "napalm.get_bgp_neighbors"
+        input:
+          hostname: <% $.device %>
+        on-complete:
+          - end_task
 
-    get_bgp_neighbors_unitary:
-      type: direct
-      input:
-        - hostname
-
-      tasks:
-
-        get_bgp_neighbors:  
-          action: "napalm.get_bgp_neighbors"
-          input:
-            hostname: <% $.hostname %>
+      end_task:
+        action: "core.noop"

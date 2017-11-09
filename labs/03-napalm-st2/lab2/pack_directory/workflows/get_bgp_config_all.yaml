@@ -1,40 +1,32 @@
 ---
   version: '2.0'
-  name: napalm.get_bgp_config_all
-  description: Get the BGP config from a list of devices
-  workflows:
 
-    main:
-      type: direct
-      input:
+  napalm.get_bgp_config_all:
+
+    input:
       - device_list
 
-      tasks:
+    type: direct
 
-        get_inventory:
-          action: "napalm.file_to_obj"
-          input:
-            file_location: <% $.device_list %>
-          publish:
-            inventory: <% task(get_inventory).result.result %>
-          on-success:
-            - get_bgp_config_all
+    tasks:
 
-        get_bgp_config_all:
-          with-items: device in <% list($.inventory.keys()) %>
-          workflow: get_bgp_config_unitary
-          input:
-            hostname: <% $.device %>
+      get_inventory:
+        action: "napalm.file_to_obj"
+        input:
+          file_location: <% $.device_list %>
+        publish:
+          inventory: <% task(get_inventory).result.result %>
+        on-success:
+          - get_bgp_config
 
+      get_bgp_config:
+        with-items: device in <% list($.inventory.keys()) %>
+        action: "napalm.get_bgp_config"
+        input:
+          hostname: <% $.device %>
+        on-complete:
+          - end_task
 
-    get_bgp_config_unitary:
-      type: direct
-      input:
-        - hostname
+      end_task:
+        action: "core.noop"
 
-      tasks:
-
-        get_bgp_config:  
-          action: "napalm.get_bgp_config"
-          input:
-            hostname: <% $.hostname %>
