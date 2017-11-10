@@ -146,3 +146,161 @@ mab@mab-infra:~$
 
 ### Fire cfg_bgp_all_iac from a generic Webhook:
 
+### Check golden config after a decrease in LLDP neighbors:
+
+- First enable the ```NapalmLLDPSensor```:
+```
+mab@mab-infra:~$ st2 sensor enable napalm.NapalmLLDPSensor
++---------------+--------------------------------------------------------------+
+| Property      | Value                                                        |
++---------------+--------------------------------------------------------------+
+| id            | 59d3a00c7cae2206f9add1ed                                     |
+| name          | NapalmLLDPSensor                                             |
+| pack          | napalm                                                       |
+| description   | Sensor that uses NAPALM to retrieve LLDP information from    |
+|               | network devices                                              |
+| artifact_uri  | file:///opt/stackstorm/packs/napalm/sensors/lldp_sensor.py   |
+| enabled       | True                                                         |
+| entry_point   | sensors.lldp_sensor.NapalmLLDPSensor                         |
+| trigger_types | [                                                            |
+|               |     "napalm.LLDPNeighborDecrease",                           |
+|               |     "napalm.LLDPNeighborDecrease"                            |
+|               | ]                                                            |
+| uid           | sensor_type:napalm:NapalmLLDPSensor                          |
++---------------+--------------------------------------------------------------+
+mab@mab-infra:~$
+```
+- Then shut down a device in order to create, on another device, the condition of a decrease of LLDP neighbor. In our case we are disconnecting the vMX.
+- Check if the trigger has been dispatched:
+```
+mab@mab-infra:~$ st2 trigger-instance list -n 10
++--------------------------+--------------------------------+-------------------------------+-----------+
+| id                       | trigger                        | occurrence_time               | status    |
++--------------------------+--------------------------------+-------------------------------+-----------+
+| 5a05c7f67cae22047e60b324 | core.st2.sensor.process_spawn  | Fri, 10 Nov 2017 15:38:30 UTC | processed |
+| 5a05c7fe7cae22047e60b326 | core.st2.generic.actiontrigger | Fri, 10 Nov 2017 15:38:38 UTC | processed |
+| 5a05c8097cae22047e60b327 | core.st2.generic.actiontrigger | Fri, 10 Nov 2017 15:38:49 UTC | processed |
+| 5a05c80c7cae22047e60b328 | core.st2.sensor.process_exit   | Fri, 10 Nov 2017 15:38:52 UTC | processed |
+| 5a05c80f7cae22047e60b32a | core.st2.sensor.process_spawn  | Fri, 10 Nov 2017 15:38:55 UTC | processed |
+| 5a05c8147cae22047e60b32c | core.st2.generic.actiontrigger | Fri, 10 Nov 2017 15:39:00 UTC | processed |
+| 5a05c81f7cae22047e60b32d | napalm.LLDPNeighborDecrease    | Fri, 10 Nov 2017 15:39:11 UTC | processed |
+| 5a05c8217cae22047e60b332 | core.st2.generic.actiontrigger | Fri, 10 Nov 2017 15:39:13 UTC | processed |
+| 5a05c8227cae22047e60b333 | core.st2.generic.actiontrigger | Fri, 10 Nov 2017 15:39:14 UTC | processed |
+| 5a05c8257cae22047e60b334 | core.st2.sensor.process_exit   | Fri, 10 Nov 2017 15:39:17 UTC | processed |
++--------------------------+--------------------------------+-------------------------------+-----------+
++-------------------------------------------------------------------------------------------------------+
+| Note: Only first 10 triggerinstances are displayed. Use -n/--last flag for more results.              |
++-------------------------------------------------------------------------------------------------------+
+mab@mab-infra:~$
+```
+- Or you can filter on the name of the trigger:
+
+```
+mab@mab-infra:~$ st2 trigger-instance list --trigger napalm.LLDPNeighborDecrease -n 10
++--------------------------+-----------------------------+-------------------------------+-----------+
+| id                       | trigger                     | occurrence_time               | status    |
++--------------------------+-----------------------------+-------------------------------+-----------+
+| 5a05c81f7cae22047e60b32d | napalm.LLDPNeighborDecrease | Fri, 10 Nov 2017 15:39:11 UTC | processed |
++--------------------------+-----------------------------+-------------------------------+-----------+
+mab@mab-infra:~$
+```
+- Then you can check the details of the trigger-instance, it will give information like the device name, number of OldPeers, number of NewPeers:
+```
+mab@mab-infra:~$ st2 trigger-instance get 5a05c81f7cae22047e60b32d
++-----------------+-------------------------------------------------+
+| Property        | Value                                           |
++-----------------+-------------------------------------------------+
+| id              | 5a05c81f7cae22047e60b32d                        |
+| trigger         | napalm.LLDPNeighborDecrease                     |
+| occurrence_time | 2017-11-10T15:39:11.713000Z                     |
+| payload         | {                                               |
+|                 |     "device": "arista1",                        |
+|                 |     "timestamp": "2017-11-10 16:39:11.708087",  |
+|                 |     "oldpeers": 2,                              |
+|                 |     "newpeers": 0                               |
+|                 | }                                               |
+| status          | processed                                       |
++-----------------+-------------------------------------------------+
+mab@mab-infra:~$
+```
+- xxx
+
+```
+mab@mab-infra:~$ st2 run napalm.check_consistency hostname=arista1 repository=https://github.com/mab27/network_iac.git 
+..
+id: 5a05d2247cae22068c7defb2
+status: succeeded
+parameters: 
+  hostname: arista1
+  repository: https://github.com/mab27/network_iac.git
+result: 
+  exit_code: 0
+  result:
+    deviation: false
+    diff_contents: ''
+  stderr: ''
+  stdout: ''
+mab@mab-infra:~$
+```
+
+```
+mab@mab-infra:~$ st2 rule-enforcement list -n 10
++--------------------------+--------------------------------+--------------------------+--------------------------+-----------------------------+
+| id                       | rule.ref                       | trigger_instance_id      | execution_id             | enforced_at                 |
++--------------------------+--------------------------------+--------------------------+--------------------------+-----------------------------+
+| 5a05d5227cae22047e60b57f | default.lldp_neighbor_decrease | 5a05d5217cae22047e60b578 | 5a05d5227cae22047e60b57e | 2017-11-10T16:34:41.979049Z |
+| 5a05d5217cae22047e60b57c | napalm.lldp_remediate          | 5a05d5217cae22047e60b578 | 5a05d5217cae22047e60b57b | 2017-11-10T16:34:41.736815Z |
+| 5a05cf6b7cae22047e60b465 | default.github_commit_iac      | 5a05cf6b7cae22047e60b461 | 5a05cf6b7cae22047e60b464 | 2017-11-10T16:10:19.457252Z |
+| 5a05c81f7cae22047e60b331 | napalm.lldp_remediate          | 5a05c81f7cae22047e60b32d | 5a05c81f7cae22047e60b330 | 2017-11-10T15:39:11.731455Z |
+| 5a05c4527cae22047e60b271 | default.github_commit_iac      | 5a05c4527cae22047e60b26d | 5a05c4527cae22047e60b270 | 2017-11-10T15:22:58.059714Z |
+| 5a05b1577cae22047e60af41 | default.github_commit_iac      | 5a05b1567cae22047e60af3d | 5a05b1577cae22047e60af40 | 2017-11-10T14:01:58.989730Z |
+| 5a05a3127cae2204054481be | default.github_commit_iac      | 5a05a3127cae2204054481ba | 5a05a3127cae2204054481bd | 2017-11-10T13:01:06.522258Z |
+| 5a05a21b7cae220405448165 | default.github_commit_iac      | 5a05a21a7cae22040544815e | 5a05a21a7cae220405448164 | 2017-11-10T12:56:58.656683Z |
+| 5a05a21a7cae220405448162 | napalm_2.github_commit_iac     | 5a05a21a7cae22040544815e | 5a05a21a7cae220405448161 | 2017-11-10T12:56:58.306501Z |
+| 5a059c507cae22040544801f | napalm_2.github_commit_iac     | 5a059c4f7cae22040544801b | 5a059c4f7cae22040544801e | 2017-11-10T12:32:15.901494Z |
++--------------------------+--------------------------------+--------------------------+--------------------------+-----------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Note: Only first 10 rule enforcements are displayed. Use -n/--last flag for more results.                                                     |
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+mab@mab-infra:~$ 
+```
+- x
+
+```
+mab@mab-infra:~$ st2 trigger-instance get 5a05d5217cae22047e60b578
++-----------------+-------------------------------------------------+
+| Property        | Value                                           |
++-----------------+-------------------------------------------------+
+| id              | 5a05d5217cae22047e60b578                        |
+| trigger         | napalm.LLDPNeighborDecrease                     |
+| occurrence_time | 2017-11-10T16:34:41.714000Z                     |
+| payload         | {                                               |
+|                 |     "device": "arista1",                        |
+|                 |     "timestamp": "2017-11-10 17:34:41.708999",  |
+|                 |     "oldpeers": 2,                              |
+|                 |     "newpeers": 0                               |
+|                 | }                                               |
+| status          | processed                                       |
++-----------------+-------------------------------------------------+
+mab@mab-infra:~$ 
+```
+
+- x
+
+```
+mab@mab-infra:~$ st2 execution get 5a05d5227cae22047e60b57e
+id: 5a05d5227cae22047e60b57e
+status: succeeded (3s elapsed)
+parameters: 
+  hostname: arista1
+  repository: https://github.com/mab27/network_iac.git
+result: 
+  exit_code: 0
+  result:
+    deviation: false
+    diff_contents: ''
+  stderr: ''
+  stdout: ''
+mab@mab-infra:~$ 
+```
+
