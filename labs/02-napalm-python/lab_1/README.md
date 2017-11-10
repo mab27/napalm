@@ -1,4 +1,4 @@
-# Lab1
+# Lab_1
 
 ## Overview:
 - Simple python files. All information included in the files.

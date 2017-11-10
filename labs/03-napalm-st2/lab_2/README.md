@@ -1,4 +1,4 @@
-# Lab2
+# Lab_2
 
 ## Overview:
 - Writing custom workflows based on standard actions from the NAPALM pack.
