@@ -1,0 +1,32 @@
+---
+  version: '2.0'
+
+  napalm.get_bgp_config_all:
+
+    input:
+      - device_list
+
+    type: direct
+
+    tasks:
+
+      get_inventory:
+        action: "napalm.file_to_obj"
+        input:
+          file_location: <% $.device_list %>
+        publish:
+          inventory: <% task(get_inventory).result.result %>
+        on-success:
+          - get_bgp_config
+
+      get_bgp_config:
+        with-items: device in <% list($.inventory.keys()) %>
+        action: "napalm.get_bgp_config"
+        input:
+          hostname: <% $.device %>
+        on-complete:
+          - end_task
+
+      end_task:
+        action: "core.noop"
+

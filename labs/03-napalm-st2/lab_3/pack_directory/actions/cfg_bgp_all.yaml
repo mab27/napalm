@@ -1,0 +1,23 @@
+---
+name: "cfg_bgp_all"
+pack: "napalm"
+runner_type: "mistral-v2"
+description: "Configure BGP from a list of devices"
+enabled: true
+entry_point: "workflows/cfg_bgp_all.yaml"
+parameters:
+    skip_notify:
+      default:
+        - "render_config"
+        - "load_config"
+        - "audit_config"
+    device_list:
+      required: true
+      description: "Path to devices inventory"
+      type: string
+      default: "/home/mab/mab_automate/napalm/inventory/inventory.yml"
+    env_path:
+      required: true
+      description: "Path to templates and variables files"
+      type: string
+      default: "/home/mab/mab_automate/napalm"

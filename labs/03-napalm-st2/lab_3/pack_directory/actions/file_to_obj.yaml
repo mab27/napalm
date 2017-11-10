@@ -1,0 +1,13 @@
+---
+name: file_to_obj
+pack: napalm
+description: Convert a YAML file to an object
+runner_type: run-python
+entry_point: "file_to_obj.py"
+enabled: true
+parameters:
+    file_location:
+        type: string
+        description: path to the location of the YAML file
+        required: true
+        position: 0

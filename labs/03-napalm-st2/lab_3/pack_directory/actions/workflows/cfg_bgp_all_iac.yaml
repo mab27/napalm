@@ -1,0 +1,45 @@
+---
+  version: '2.0'
+
+  napalm.cfg_bgp_all_iac:
+
+    input:
+      - hosted_repo
+      - local_copy
+
+    type: direct
+
+    tasks:
+
+      git_clone:
+        action: "git.clone"
+        input:
+          source: "<% $.hosted_repo %>"
+          destination: "<% $.local_copy %>"
+          hosts: localhost
+          sudo: true
+        on-success:
+          - cfg_bgp_all
+
+      cfg_bgp_all:
+        action: "napalm.cfg_bgp_all"
+        input:
+          skip_notify: 
+            - "render_config"
+            - "load_config"
+            - "audit_config"
+          device_list: "<% $.local_copy %>/inventory/inventory.yml"
+          env_path: "<% $.local_copy %>"
+        on-complete:
+          - remove_local_content
+
+      remove_local_content:
+        join: one
+        action: "linux.rm"
+        input:
+            hosts: localhost
+            target: <% $.local_copy %>
+            recursive: true
+            sudo: true
+            verbose: false
+

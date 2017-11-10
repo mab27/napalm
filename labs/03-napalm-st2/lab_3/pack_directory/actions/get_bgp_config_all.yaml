@@ -1,0 +1,13 @@
+---
+name: "get_bgp_config_all"
+pack: "napalm"
+runner_type: "mistral-v2"
+description: "Get the BGP config from a list of devices"
+enabled: true
+entry_point: "workflows/get_bgp_config_all.yaml"
+parameters:
+    device_list:
+      required: true
+      description: "Hostnames of the devices"
+      type: string
+      default: "home/mab/mab_automate/napalm/inventory/inventory.yml"

@@ -1,0 +1,52 @@
+---
+  version: '2.0'
+
+  napalm.cfg_bgp_all:
+
+    input:
+      - device_list
+      - env_path
+
+    type: direct
+
+    tasks:
+
+      get_inventory:
+        action: "napalm.file_to_obj"
+        input:
+          file_location: <% $.device_list %>
+        publish:
+          inventory: <% task(get_inventory).result.result %>
+        on-success:
+          - render_config
+ 
+      render_config:
+        with-items: device in <% list($.inventory.keys()) %>
+        action: "default.render_file"
+        input:
+          path_to_template: "<% $.env_path %>/template_files/cfg_ebgp/<% $.inventory[$.device][driver] %>.j2"
+          path_to_variables: "<% $.env_path %>/host_vars/<% $.device %>.yml"
+          path_to_render: "<% $.env_path %>/render_files/cfg_ebgp/<% $.device %>.txt"
+        on-complete:
+          - load_config
+
+      load_config:
+        with-items: device in <% list($.inventory.keys()) %>
+        action: "napalm.loadconfig"
+        input:
+          hostname: "<% $.device %>"
+          config_file: "<% $.env_path %>/render_files/cfg_ebgp/<% $.device %>.txt"
+        on-complete:
+          - audit_config
+
+      audit_config:
+        with-items: device in <% list($.inventory.keys()) %>
+        action: "napalm.get_bgp_neighbors"
+        wait-before: 15
+        input:
+          hostname: "<% $.device %>"
+        on-complete:
+          - end_task
+
+      end_task:
+        action: "core.noop"

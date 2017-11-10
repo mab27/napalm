@@ -1,0 +1,14 @@
+---
+name: github_commit_iac
+description: Fire cfg_bgp_all_iac WF upon github commit.
+enabled: true
+trigger:
+  type: git.head_sha_monitor
+criteria:
+  trigger.committer:
+    pattern: mab27
+    type: equals
+action:
+  ref: napalm.cfg_bgp_all_iac
+  parameters:
+    hosted_repo: "{{trigger.repository_url}}"

@@ -1,0 +1,20 @@
+---
+name: "cfg_bgp_all_iac"
+pack: "napalm"
+runner_type: "mistral-v2"
+description: "Configure BGP for a list of devices from a hosted repo"
+enabled: true
+entry_point: "workflows/cfg_bgp_all_iac.yaml"
+parameters:
+    hosted_repo:
+        type: string
+        description: Source URI to clone a repository from
+        default: https://github.com/mab27/network_iac.git
+        required: true
+        position: 0
+    local_copy:
+        type: string
+        description: Local destination for the cloned repo
+        default: /home/mab/mab_automate/cloned_content
+        required: true
+        position: 1

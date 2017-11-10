@@ -13,7 +13,7 @@ parameters:
         - "audit_config"
     device_list:
       required: true
-      description: "Path to devices invenotry"
+      description: "Path to devices inventory"
       type: string
       default: "/home/mab/mab_automate/napalm/inventory/inventory.yml"
     env_path:
