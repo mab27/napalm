@@ -9,7 +9,7 @@
 
 ## Getters (show commands):
 
-- get_facts_all:
+### get_facts_all:
 ```
 mab@mab-infra:~$ st2 run napalm.get_facts_all
 ..............
@@ -157,7 +157,7 @@ result:
 mab@mab-infra:~$ 
 ```
 
-- get_bgp_confg_all:
+### get_bgp_confg_all:
 ```
 mab@mab-infra:~$ st2 run napalm.get_bgp_config_all
 ..............
@@ -185,7 +185,7 @@ end_timestamp: 2017-11-09T18:54:31.267708Z
 mab@mab-infra:~$ 
 ```
 
-- get_bgp_neighbors_all:
+### get_bgp_neighbors_all:
 ```
 mab@mab-infra:~$ st2 run napalm.get_bgp_neighbors_all
 .................
@@ -224,7 +224,7 @@ mab@mab-infra:~$
 
 ## Setters (configuration commands):
 
-- cfg_bgp_all:
+### cfg_bgp_all:
 ```
 mab@mab-infra:~$ st2 run napalm.cfg_bgp_all
 ..................................

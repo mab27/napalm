@@ -8,7 +8,7 @@
 
 ## Getters (show commands):
 
-- get_facts:
+### get_facts:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_facts hostname=arista1 
 .
@@ -95,7 +95,7 @@ result:
 mab@mab-infra:/opt/stackstorm/packs$
 ```
 
-- get_bgp_config:
+### get_bgp_config:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_config hostname=arista1
 .
@@ -219,7 +219,7 @@ result:
 mab@mab-infra:/opt/stackstorm/packs$ 
 ```
 
-- get_bgp_neighbors:
+### get_bgp_neighbors:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_neighbors hostname=arista1
 .
@@ -351,7 +351,7 @@ result:
 mab@mab-infra:/opt/stackstorm/packs$ 
 ```
 
-- get_bgp_neighbors_detail:
+### get_bgp_neighbors_detail:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_neighbors_detail hostname=arista1 neighbor=172.16.0.30
 .
@@ -457,7 +457,7 @@ result:
 mab@mab-infra:/opt/stackstorm/packs$ 
 ```
 
-- get_interfaces:
+### get_interfaces:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=arista1
 .
@@ -844,7 +844,7 @@ result:
 mab@mab-infra:/opt/stackstorm/packs$ 
 ```
 
-- get_interfaces_counters:
+### get_interfaces_counters:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=arista1 counters=true
 .
@@ -1176,7 +1176,7 @@ mab@mab-infra:/opt/stackstorm/packs$
 ```
 
 
-- get_lldp_neighbors:
+### get_lldp_neighbors:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_lldp_neighbors hostname=arista1 
 .
@@ -1218,7 +1218,7 @@ result:
 mab@mab-infra:/opt/stackstorm/packs$
 ```
 
-- show_arp:
+### show_arp:
 ```
 mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_arp_table hostname=arista1 
 .
@@ -1264,6 +1264,9 @@ mab@mab-infra:/opt/stackstorm/packs
 ```
 
 ## Setters (configuration commands):
+
+### loadconfig:
+
 ```
 mab@mab-infra:/opt/stackstorm/packs$ cat ~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/arista1_bgp.txt 
 router bgp 65070

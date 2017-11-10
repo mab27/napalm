@@ -10,7 +10,7 @@
 
 ## Getters (show commands):
 
-- get_bgp_config:
+### get_bgp_config:
 
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/get_bgp_config.py 
@@ -233,7 +233,7 @@ Configured remote AS for peer 172.16.0.70 : 65070
 ------------------------------------------------------------
 ------------------------------------------------------------
 ```
-- get_bgp_neighbors:
+### get_bgp_neighbors:
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/get_bgp_neighbors.py 
 ------------------------------------------------------------
@@ -404,7 +404,7 @@ Uptime for neighbor 172.16.0.70 : 2778
 ------------------------------------------------------------
 ```
 
-- get_bgp_neighbors_detail:
+### get_bgp_neighbors_detail:
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/get_bgp_neighbors_details.py 
 ------------------------------------------------------------
@@ -602,7 +602,7 @@ Facing 172.16.0.70 connection is in state :Established
 ------------------------------------------------------------
 ------------------------------------------------------------
 ```
-- get_interfaces:
+### get_interfaces:
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/get_interfaces.py 
 ------------------------------------------------------------
@@ -1215,7 +1215,7 @@ Interface ge-0/0/0 has MAC address : 00:05:86:71:E6:00
 ------------------------------------------------------------
 ```
 
-- get_interfaces_ip:
+### get_interfaces_ip:
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/get_interfaces_ip.py 
 ------------------------------------------------------------
@@ -1320,7 +1320,7 @@ JSON dumps print:
 ------------------------------------------------------------
 ```
 
-- get_lldp_neighbors:
+### get_lldp_neighbors:
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/get_lldp_neighbors.py 
 ------------------------------------------------------------
@@ -1380,7 +1380,7 @@ JSON dumps print:
 
 ## Setters (configuration commands):
 
-- change_hostname:
+### change_hostname:
 
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/change_hostname.py 
@@ -1420,7 +1420,7 @@ Device : vmx1
 mab@mab-infra:~$ 
 ```
 
-- cfg_bgp:
+### cfg_bgp:
 ```
 mab@mab-infra:~$ sudo python mab_automate/napalm/labs/napalm-python/lab_1/configuration/cfg_bgp.py 
 ------------------------------------------------------------
@@ -1465,7 +1465,7 @@ rendering bgp template
 
 ## Validation:
 
-- basic_env:
+### basic_env:
 ```
 mab@mab-infra:~$ sudo python mab_automate/napalm/labs/napalm-python/lab_1/validation/validate_basic_env.py 
 ------------------------------------------------------------
@@ -1503,7 +1503,7 @@ Device : vmx1
 mab@mab-infra:~$ 
 ```
 
-- bgp:
+### bgp:
 ```
 mab@mab-infra:~$ sudo python mab_automate/napalm/labs/napalm-python/lab_1/validation/validate_bgp.py 
 ------------------------------------------------------------
@@ -1693,7 +1693,7 @@ mab@mab-infra:~$
 
 ## openconfig:
 
-- native_to_openconfig:
+### native_to_openconfig:
 
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/native_to_oc.py 
@@ -1857,7 +1857,7 @@ Device : vmx1
 mab@mab-infra:~$
 ```
 
-- openconfig_to_native:
+### openconfig_to_native:
 
 ```
 mab@mab-infra:~$ python mab_automate/napalm/labs/napalm-python/lab_1/configuration/oc_to_native.py 

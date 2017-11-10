@@ -3,12 +3,67 @@
 ## Overview:
 - Event-Driven automation
 - Sections:
-    - [Getters (show commands)]()
     - [Setters (configuration commands)]()
 
 ## Setters (configuration commands):
 
-- cfg_bgp_all_iac:
+### Fire cfg_bgp_all_iac from a Github Commit:
+
+- This is about using the same previous workflow ```cfg_bgp_all``` and attaching a rule to automatically fire this workflow based on a specfic event. This is essentially is the event-driven functionality which is the crux of Stackstorm. It allows to perform workflow automation without the need to manually invoke the st2 corresponding action.
+- As an event we are going to choose a commit on the github repo as our event. To do that, we'll rely on a built-in sensor from the **git** pack: **GitCommitSensor**. This sensor polls a given Git repository for new commits. When a new commit is detected, a trigger is dispatched. In StackStorm the word **trigger** refers to an object that is a representation of an event. When the event occurs, the sensor produces a trigger that flows to the rule Engine, which in turns checks it for any match against the existing rules.
+
+- We create a rule that matches the trigger type **git.head_sha_monitor**, which is the trigger dispatched by the sensor **git.GitCommitSensor**. That rule will fire fire the **cfg_ebgp_iac** workflow.
+	- [The_created_Rule]()
+
+- Upon creation of the rule, make sure it is registered:
+```
+mab@mab-infra:~$ st2 rule list -p default
++---------------------------+---------+------------------------------------------+---------+
+| ref                       | pack    | description                              | enabled |
++---------------------------+---------+------------------------------------------+---------+
+| default.github_commit_iac | default | Fire cfg_ebgp_iac WF upon github commit. | True    |
++---------------------------+---------+------------------------------------------+---------+
+```
+
+- Follow the instructions [here](https://github.com/StackStorm-Exchange/stackstorm-git#git-integration-pack) to configure the sensor. Remember to re-load the config after each modification to that file with. To do that you can either use the ```st2ctl``` command or the ```pack register``` feature:
+
+```
+sudo st2ctl reload --register-configs
+```
+or:
+
+```
+mab@mab-infra:~$ st2 pack register git
++--------------+-------+
+| Property     | Value |
++--------------+-------+
+| actions      | 3     |
+| aliases      | 0     |
+| configs      | 1     |
+| policies     | 0     |
+| policy_types | 3     |
+| rule_types   | 2     |
+| rules        | 1     |
+| runners      | 13    |
+| sensors      | 1     |
+| triggers     | 0     |
++--------------+-------+
+```
+- Make sure the sensor is enabled:
+```
+mab@mab-infra:~$ st2 sensor list -p git
++---------------------+------+-----------------------------------------------------+---------+
+| ref                 | pack | description                                         | enabled |
++---------------------+------+-----------------------------------------------------+---------+
+| git.GitCommitSensor | git  | Sensor which monitors git repositories for new      | True    |
+|                     |      | commits                                             |         |
++---------------------+------+-----------------------------------------------------+---------+
+mab@mab-infra:/opt/stackstorm/packs/git$
+```
+
+- Git add/commit/push this to the [remote repository](https://github.com/mab27/network_iac):
+- Check 1) if the trigger has been dispatched, 2) if the rule matched and 3) if the corresponding workflow has been fired:
+
 ```
 mab@mab-infra:~$ st2 rule-enforcement list -n 5
 +--------------------------+----------------------------+--------------------------+--------------------------+-----------------------------+
@@ -88,3 +143,6 @@ end_timestamp: 2017-11-10T13:02:11.313099Z
 +-----------------------------+------------------------+----------------------+--------------------------+-------------------------------+
 mab@mab-infra:~$
 ```
+
+### Fire cfg_bgp_all_iac from a generic Webhook:
+
