@@ -1,4 +1,4 @@
-# napalm-stacksotrm:
+# NAPALM with StackStorm:
 - This is about consuming napalm from StackStorm
 
 ## How to (in order):

@@ -1,4 +1,4 @@
-# NAPALM CLI:
+# NAPALM through CLI:
 - This allows to consume the NAPALM library without writing any python script nor using any automation tool. This is a CLI you can use to directly interact with the network devices.
 
 ## Call methods:
