@@ -10,7 +10,7 @@
 
 ### get_facts:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_facts hostname=arista1 
+mab@mab-infra:~$ st2 run napalm.get_facts hostname=arista1 
 .
 id: 59fc26167cae22068a51a720
 status: succeeded
@@ -32,8 +32,13 @@ result:
       vendor: Arista
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_facts hostname=vmx1 
+mab@mab-infra:~$ 
+mab@mab-infra:~$
+mab@mab-infra:~$ st2 execution get 59fc26167cae22068a51a720 -k result.raw.os_version
+4.18.1F-4591672.4181F
+mab@mab-infra:~$ 
+mab@mab-infra:~$
+mab@mab-infra:~$ st2 run napalm.get_facts hostname=vmx1 
 ...
 id: 59fc261d7cae22068a51a723
 status: succeeded
@@ -92,12 +97,16 @@ result:
       vendor: Juniper
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$
+mab@mab-infra:~$ 
+mab@mab-infra:~$
+mab@mab-infra:~$mab@mab-infra:~$ st2 execution get 59fc261d7cae22068a51a723 -k result.raw.os_version
+14.1R4.9
+mab@mab-infra:~$
 ```
 
 ### get_bgp_config:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_config hostname=arista1
+mab@mab-infra:~$ st2 run napalm.get_bgp_config hostname=arista1
 .
 id: 59fc21b17cae22068a51a6d5
 status: succeeded
@@ -156,8 +165,8 @@ result:
         type: ''
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_config hostname=vmx1
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.get_bgp_config hostname=vmx1
 .
 id: 59fc21b87cae22068a51a6d8
 status: succeeded
@@ -216,12 +225,12 @@ result:
         type: external
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
+mab@mab-infra:~$ 
 ```
 
 ### get_bgp_neighbors:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_neighbors hostname=arista1
+mab@mab-infra:~$ st2 run napalm.get_bgp_neighbors hostname=arista1
 .
 id: 59fc221d7cae22068a51a6db
 status: succeeded
@@ -284,8 +293,8 @@ result:
         uptime: -6515
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_neighbors hostname=vmx1
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.get_bgp_neighbors hostname=vmx1
 ..
 id: 59fc222a7cae22068a51a6de
 status: succeeded
@@ -348,12 +357,12 @@ result:
         uptime: 948
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
+mab@mab-infra:~$ 
 ```
 
 ### get_bgp_neighbors_detail:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_neighbors_detail hostname=arista1 neighbor=172.16.0.30
+mab@mab-infra:~$ st2 run napalm.get_bgp_neighbors_detail hostname=arista1 neighbor=172.16.0.30
 .
 id: 59fc22bd7cae22068a51a6e4
 status: succeeded
@@ -403,8 +412,8 @@ result:
           up: true
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_bgp_neighbors_detail hostname=vmx1 neighbor=172.16.0.70
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.get_bgp_neighbors_detail hostname=vmx1 neighbor=172.16.0.70
 ..
 id: 59fc22ca7cae22068a51a6e7
 status: succeeded
@@ -454,12 +463,12 @@ result:
           up: true
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
+mab@mab-infra:~$ 
 ```
 
 ### get_interfaces:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=arista1
+mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=arista1
 .
 id: 59fc23487cae22068a51a6ea
 status: succeeded
@@ -485,8 +494,8 @@ result:
         speed: 1000
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=vmx1
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=vmx1
 ..
 id: 59fc234f7cae22068a51a6ed
 status: succeeded
@@ -771,12 +780,12 @@ result:
         speed: -1
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
+mab@mab-infra:~$ 
 ```
 
 - get_interfaces_ip:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=arista1 ipaddresses=true
+mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=arista1 ipaddresses=true
 .
 id: 59fc23977cae22068a51a6f0
 status: succeeded
@@ -799,8 +808,8 @@ result:
         ipv6: {}
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=vmx1 ipaddresses=true
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=vmx1 ipaddresses=true
 ..
 id: 59fc23a07cae22068a51a6f3
 status: succeeded
@@ -841,12 +850,12 @@ result:
             prefix_length: 128
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
+mab@mab-infra:~$ 
 ```
 
 ### get_interfaces_counters:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=arista1 counters=true
+mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=arista1 counters=true
 .
 id: 59fc23fe7cae22068a51a6fc
 status: succeeded
@@ -885,8 +894,8 @@ result:
         tx_unicast_packets: 266
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_interfaces hostname=vmx1 counters=true
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=vmx1 counters=true
 ..
 id: 59fc24067cae22068a51a6ff
 status: succeeded
@@ -1172,13 +1181,13 @@ result:
         tx_unicast_packets: -1
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
+mab@mab-infra:~$ 
 ```
 
 
 ### get_lldp_neighbors:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_lldp_neighbors hostname=arista1 
+mab@mab-infra:~$ st2 run napalm.get_lldp_neighbors hostname=arista1 
 .
 id: 59fc24a47cae22068a51a702
 status: succeeded
@@ -1196,8 +1205,8 @@ result:
         port: '514'
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_lldp_neighbors hostname=vmx1 
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.get_lldp_neighbors hostname=vmx1 
 .
 id: 59fc24ab7cae22068a51a705
 status: succeeded
@@ -1215,12 +1224,12 @@ result:
         port: Ethernet1
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$
+mab@mab-infra:~$
 ```
 
 ### show_arp:
 ```
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_arp_table hostname=arista1 
+mab@mab-infra:~$ st2 run napalm.get_arp_table hostname=arista1 
 .
 id: 59fc24cd7cae22068a51a708
 status: succeeded
@@ -1240,7 +1249,7 @@ result:
       mac: 00:0C:29:62:D7:0D
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.get_arp_table hostname=vmx1 
+mab@mab-infra:~$ st2 run napalm.get_arp_table hostname=vmx1 
 .
 id: 59fc24d37cae22068a51a70b
 status: succeeded
@@ -1260,7 +1269,7 @@ result:
       mac: 00:0C:29:62:D7:0D
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs
+mab@mab-infra:~$
 ```
 
 ## Setters (configuration commands):
@@ -1268,7 +1277,7 @@ mab@mab-infra:/opt/stackstorm/packs
 ### loadconfig:
 
 ```
-mab@mab-infra:/opt/stackstorm/packs$ cat ~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/arista1_bgp.txt 
+mab@mab-infra:~$ cat ~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/arista1_bgp.txt 
 router bgp 65070
    router-id 70.70.70.70
    neighbor 172.16.0.30 remote-as 65030
@@ -1294,8 +1303,8 @@ protocols {
         interface ge-0/0/0;
     }
 }
-mab@mab-infra:/opt/stackstorm/packs$
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.loadconfig hostname=arista1 config_file=~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/arista1_bgp.txt
+mab@mab-infra:~$
+mab@mab-infra:~$ st2 run napalm.loadconfig hostname=arista1 config_file=~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/arista1_bgp.txt
 ..
 id: 59fc299f7cae22068a51a72c
 status: succeeded
@@ -1307,8 +1316,8 @@ result:
   result: load (merge) successful on arista1
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
-mab@mab-infra:/opt/stackstorm/packs$ st2 run napalm.loadconfig hostname=vmx1 config_file=~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/vmx1_bgp.txt
+mab@mab-infra:~$
+mab@mab-infra:~$ st2 run napalm.loadconfig hostname=vmx1 config_file=~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/vmx1_bgp.txt
 ..
 id: 59fc29ce7cae22068a51a72f
 status: succeeded
@@ -1320,5 +1329,5 @@ result:
   result: load (merge) successful on vmx1
   stderr: ''
   stdout: ''
-mab@mab-infra:/opt/stackstorm/packs$ 
+mab@mab-infra:~$ 
 ```
