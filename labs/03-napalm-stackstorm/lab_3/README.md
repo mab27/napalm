@@ -4,7 +4,7 @@
 - Event-Driven automation
 - Sections:
     - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#setters-configuration-commands)
-    [Validation (configuration/state check)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#validation-configurationstate-check)
+    - [Validation (configuration/state check)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#validation-configurationstate-check)
 
 ## Setters (configuration commands):
 
