@@ -81,6 +81,22 @@ mab@mab-infra:~$ st2 rule-enforcement list -n 5
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 mab@mab-infra:~$
 ```
+- Check the details of the rule that has been enfored
+```
+mab@mab-infra:~$ st2 rule-enforcement get 5a05a3127cae2204054481be
++---------------------+-----------------------------+
+| Property            | Value                       |
++---------------------+-----------------------------+
+| id                  | 5a05a3127cae2204054481be    |
+| rule.ref            | default.github_commit_iac   |
+| trigger_instance_id | 5a05a3127cae2204054481ba    |
+| execution_id        | 5a05a3127cae2204054481bd    |
+| failure_reason      |                             |
+| enforced_at         | 2017-11-10T13:01:06.522258Z |
++---------------------+-----------------------------+
+mab@mab-infra:~$ 
+```
+
 - Check the content of the trigger that has been dispatched:
 ```
 mab@mab-infra:~$ st2 trigger-instance get 5a05a3127cae2204054481ba
@@ -110,6 +126,8 @@ mab@mab-infra:~$ st2 trigger-instance get 5a05a3127cae2204054481ba
 +-----------------+--------------------------------------------------------------+
 mab@mab-infra:~$
 ```
+- Notice the different fields included in this trigger-type (like **committer**, **branch**, **revision** etc ...). You can use them a a filtering criteria in your rule but also as information you can pass as parameters to the workflows.
+
 - Check the details of the workflow that has been fired, as a result of the rule enforcement:
 ```
 mab@mab-infra:~$ st2 execution get 5a05a3127cae2204054481bd
@@ -151,8 +169,6 @@ end_timestamp: 2017-11-10T13:02:11.313099Z
 +-----------------------------+------------------------+----------------------+--------------------------+-------------------------------+
 mab@mab-infra:~$
 ```
-
-### Fire a bgp configuration workflow from a generic Webhook:
 
 ## Validation (configuration/state check):
 
@@ -214,6 +230,23 @@ mab@mab-infra:~$ st2 trigger-instance list --trigger napalm.LLDPNeighborDecrease
 +--------------------------+-----------------------------+-------------------------------+-----------+
 mab@mab-infra:~$
 ```
+
+- Check the details of the rule that has been enfored
+```
+mab@mab-infra:~$ st2 rule-enforcement get 5a05d5227cae22047e60b57f
++---------------------+--------------------------------+
+| Property            | Value                          |
++---------------------+--------------------------------+
+| id                  | 5a05d5227cae22047e60b57f       |
+| rule.ref            | default.lldp_neighbor_decrease |
+| trigger_instance_id | 5a05d5217cae22047e60b578       |
+| execution_id        | 5a05d5227cae22047e60b57e       |
+| failure_reason      |                                |
+| enforced_at         | 2017-11-10T16:34:41.979049Z    |
++---------------------+--------------------------------+
+mab@mab-infra:~$ 
+```
+
 - Then you can check the details of the trigger-instance, it will give information like the **device** name, number of **OldPeers**, number of **NewPeers**:
 ```
 mab@mab-infra:~$ st2 trigger-instance get 5a05c81f7cae22047e60b32d
@@ -290,4 +323,149 @@ result:
   stderr: ''
   stdout: ''
 mab@mab-infra:~$ 
+```
+
+### Fire an investigation workflow from a generic Webhook:
+
+- Systems that push data to the ST2 API when an event you are interested in occurs.
+- Webhooks come handy is when you want to consume events from a 3rd party service which already offer webhooks integration - e.g. GitHub
+- Webhooks aren't directly created --> they're created via rules.
+- The rules in this pack are written using one of the default triggers: ```core.st2.webhook``` --> This means that the rule will be watching for incoming events that are in the form of a custom webhook.
+- POST-ing data to a custom webhook will cause a trigger with the following attributes to be dispatched:
+	- **trigger** - Trigger name.
+	- **trigger.headers** - Dictionary containing the request headers.
+	- **trigger.body** - Dictionary containing the request body.
+
+- Obtain an authentication token. You'll need it to replace **$TOKEN** in the cURL commands below:
+```
+mab@mab-infra:~$ st2 auth username-goes-here -p password-goes-here
++----------+----------------------------------+
+| Property | Value                            |
++----------+----------------------------------+
+| user     | st2admin                         |
+| token    | dfe66f29038c443eb5a7050be96857e8 |
+| expiry   | 2017-11-14T10:49:24.539303Z      |
++----------+----------------------------------+
+mab@mab-infra:~$
+```
+
+- Send the following HTTP call via cURL command:
+```
+curl -k -H "Content-Type:application/json" -H "X-Auth-Token:$TOKEN" -d '{"logsource":"vmx1","message":"BGP-EXCEED-LIMIT","neighbor":"192.168.0.40","asnum":"102","prefixes":"50"}' http://localhost:9101/v1/webhooks/napalm_bgp_prefix_exceeded
+```
+
+- Below an example with a real token:
+```
+mab@mab-infra:~$ curl -k -H "Content-Type:application/json" -H "X-Auth-Token:dfe66f29038c443eb5a7050be96857e8" -d '{"logsource":"vmx1","message":"BGP-EXCEED-LIMIT","neighbor":"192.168.0.40","asnum":"102","prefixes":"50"}' http://localhost:9101/v1/webhooks/napalm_bgp_prefix_exceeded
+{
+    "prefixes": "50",
+    "message": "BGP-EXCEED-LIMIT",
+    "logsource": "vmx1",
+    "asnum": "102",
+    "neighbor": "192.168.0.40"
+}mab@mab-infra:~$
+```
+
+- Check if the rule has been enforced:
+```
+mab@mab-infra:~$ st2 rule-enforcement list -n 10+--------------------------+--------------------------------+--------------------------+--------------------------+-----------------------------+
+| id                       | rule.ref                       | trigger_instance_id      | execution_id             | enforced_at                 |
++--------------------------+--------------------------------+--------------------------+--------------------------+-----------------------------+
+| 5a0980af7cae224896857192 | napalm.bgp_prefix_exceeded     | 5a0980af7cae22489685718e | 5a0980af7cae224896857191 | 2017-11-13T11:23:27.356188Z |
+| 5a0980507cae224896857172 | napalm.bgp_prefix_exceeded     | 5a09804f7cae22489685716e | 5a0980507cae224896857171 | 2017-11-13T11:21:51.938120Z |
+| 5a097ee97cae224896857124 | napalm.bgp_prefix_exceeded     | 5a097ee97cae224896857120 | 5a097ee97cae224896857123 | 2017-11-13T11:15:53.346424Z |
+| 5a097db07cae2248968570e7 | napalm.bgp_prefix_exceeded     | 5a097db07cae2248968570e3 | 5a097db07cae2248968570e6 | 2017-11-13T11:10:40.672397Z |
+| 5a097c557cae22489685709b | napalm.bgp_prefix_exceeded     | 5a097c557cae224896857097 | 5a097c557cae22489685709a | 2017-11-13T11:04:53.602724Z |
+| 5a097bf67cae224896857074 | napalm.bgp_prefix_exceeded     | 5a097bf67cae224896857072 |                          | 2017-11-13T11:03:18.108703Z |
+| 5a0978c77cae22040cdeabc7 | napalm.bgp_prefix_exceeded     | 5a0978c77cae22040cdeabc5 |                          | 2017-11-13T10:49:43.112633Z |
+| 5a0978ab7cae22040cdeabbe | napalm.bgp_prefix_exceeded     | 5a0978ab7cae22040cdeabbc |                          | 2017-11-13T10:49:15.032781Z |
+| 5a05d5227cae22047e60b57f | default.lldp_neighbor_decrease | 5a05d5217cae22047e60b578 | 5a05d5227cae22047e60b57e | 2017-11-10T16:34:41.979049Z |
+| 5a05d5217cae22047e60b57c | napalm.lldp_remediate          | 5a05d5217cae22047e60b578 | 5a05d5217cae22047e60b57b | 2017-11-10T16:34:41.736815Z |
++--------------------------+--------------------------------+--------------------------+--------------------------+-----------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Note: Only first 10 rule enforcements are displayed. Use -n/--last flag for more results.                                                     |
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+mab@mab-infra:~$ 
+```
+
+- Check the details of the rule that has been enforced:
+```
+mab@mab-infra:~$ st2 rule-enforcement get 5a0981697cae2248968571be
++---------------------+-----------------------------+
+| Property            | Value                       |
++---------------------+-----------------------------+
+| id                  | 5a0981697cae2248968571be    |
+| rule.ref            | napalm.bgp_prefix_exceeded  |
+| trigger_instance_id | 5a0981697cae2248968571ba    |
+| execution_id        | 5a0981697cae2248968571bd    |
+| failure_reason      |                             |
+| enforced_at         | 2017-11-13T11:26:33.452145Z |
++---------------------+-----------------------------+
+```
+
+- Check the details of the trigger-instance:
+```
+mab@mab-infra:~$ st2 trigger-instance get 5a0980af7cae22489685718e
++-----------------+--------------------------------------------------------------+
+| Property        | Value                                                        |
++-----------------+--------------------------------------------------------------+
+| id              | 5a0980af7cae22489685718e                                     |
+| trigger         | core.6299082c-03f7-4d45-87c9-74095dd2d437                    |
+| occurrence_time | 2017-11-13T11:23:27.301000Z                                  |
+| payload         | {                                                            |
+|                 |     "body": {                                                |
+|                 |         "prefixes": "50",                                    |
+|                 |         "message": "BGP-EXCEED-LIMIT",                       |
+|                 |         "logsource": "vmx1",                                 |
+|                 |         "asnum": "102",                                      |
+|                 |         "neighbor": "172.16.0.40"                            |
+|                 |     },                                                       |
+|                 |     "headers": {                                             |
+|                 |         "Content-Length": "104",                             |
+|                 |         "X-Request-Id": "0fcd7623-f0ff-                      |
+|                 | 46f1-be64-20641df0fe2d",                                     |
+|                 |         "Accept": "*/*",                                     |
+|                 |         "X-Auth-Token": "dfe66f29038c443eb5a7050be96857e8",  |
+|                 |         "Host": "localhost:9101",                            |
+|                 |         "User-Agent": "curl/7.47.0",                         |
+|                 |         "Content-Type": "application/json"                   |
+|                 |     }                                                        |
+|                 | }                                                            |
+| status          | processed                                                    |
++-----------------+--------------------------------------------------------------+
+mab@mab-infra:~$
+```
+
+- Check the details of the action/workflow execution resulted from this trigger:
+```
+mab@mab-infra:~$ st2 execution get 5a0980af7cae224896857191
+id: 5a0980af7cae224896857191
+action.ref: napalm.bgp_prefix_exceeded_chain
+parameters: 
+  asnum: '102'
+  hostname: vmx1
+  message: BGP-EXCEED-LIMIT
+  neighbor: 172.16.0.40
+  prefixes: 50
+status: failed (17s elapsed)
+result_task: send_email
+result: 
+  failed: true
+  return_code: 2
+  stderr: Unable to find sendmail binary in PATH
+  stdout: ''
+  succeeded: false
+start_timestamp: 2017-11-13T11:23:27.426076Z
+end_timestamp: 2017-11-13T11:23:44.355119Z
++--------------------------+------------------------+--------------------+--------------------------+-------------------------------+
+| id                       | status                 | task               | action                   | start_timestamp               |
++--------------------------+------------------------+--------------------+--------------------------+-------------------------------+
+| 5a0980af7cae224869fa9108 | succeeded (3s elapsed) | show_bgp_neighbors | napalm.get_bgp_neighbors | Mon, 13 Nov 2017 11:23:27 UTC |
+| 5a0980b37cae224869fa910a | succeeded (2s elapsed) | show_route         | napalm.get_route_to      | Mon, 13 Nov 2017 11:23:31 UTC |
+| 5a0980b67cae224869fa910c | succeeded (5s elapsed) | show_log           | napalm.get_log           | Mon, 13 Nov 2017 11:23:34 UTC |
+| 5a0980bc7cae224869fa910e | succeeded (0s elapsed) | get_html_header    | core.local               | Mon, 13 Nov 2017 11:23:40 UTC |
+| 5a0980bd7cae224869fa9110 | succeeded (1s elapsed) | get_html_footer    | core.local               | Mon, 13 Nov 2017 11:23:41 UTC |
+| 5a0980bf7cae224869fa9112 | failed (0s elapsed)    | send_email         | core.sendmail            | Mon, 13 Nov 2017 11:23:43 UTC |
++--------------------------+------------------------+--------------------+--------------------------+-------------------------------+
+mab@mab-infra:~$
 ```
