@@ -3,8 +3,8 @@
 ## Overview:
 - Invoking standard actions from the NAPALM pack.
 - Sections:
-    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab1#getters-show-commands)
-    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab_1#setters-configuration-commands)
+    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab1#getters-show-commands)
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#setters-configuration-commands)
 
 ## Getters (show commands):
 

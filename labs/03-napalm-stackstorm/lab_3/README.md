@@ -3,8 +3,8 @@
 ## Overview:
 - Event-Driven automation
 - Sections:
-    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab_3#setters-configuration-commands)
-    [Validation (configuration/state check)]()
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#setters-configuration-commands)
+    [Validation (configuration/state check)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#validation-configurationstate-check)
 
 ## Setters (configuration commands):
 
@@ -14,7 +14,7 @@
 - As an event we are going to choose a commit on the github repo as our event. To do that, we'll rely on a built-in sensor from the **git** pack: **GitCommitSensor**. This sensor polls a given Git repository for new commits. When a new commit is detected, a trigger is dispatched. In StackStorm the word **trigger** refers to an object that is a representation of an event. When the event occurs, the sensor produces a trigger that flows to the rule Engine, which in turns checks it for any match against the existing rules.
 
 - We create a rule that matches the trigger type **git.head_sha_monitor**, which is the trigger dispatched by the sensor **git.GitCommitSensor**. That rule will fire fire the **cfg_ebgp_iac** workflow.
-	- [The_created_Rule]()
+	- [The_created_Rule](https://github.com/mab27/napalm/blob/master/labs/03-napalm-stackstorm/lab_3/pack_directory/rules/github-commit-iac.yaml)
 
 - Upon creation of the rule, make sure it is registered:
 ```
