@@ -17,7 +17,7 @@
 - Code examples on how to use NAPALM via various methods:
 	- [via CLI](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli)
 	- [python script files](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python)
-	- [via StackStorm](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2)
+	- [via StackStorm](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm)
 	- [via Ansible](https://github.com/mab27/napalm/tree/master/labs/04-napalm-ansible)
 - The examples are performed on two seperate network operating stems:
 	- Juniper Junos
