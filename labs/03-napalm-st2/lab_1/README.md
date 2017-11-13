@@ -99,7 +99,7 @@ result:
   stdout: ''
 mab@mab-infra:~$ 
 mab@mab-infra:~$
-mab@mab-infra:~$mab@mab-infra:~$ st2 execution get 59fc261d7cae22068a51a723 -k result.raw.os_version
+mab@mab-infra:~$ st2 execution get 59fc261d7cae22068a51a723 -k result.raw.os_version
 14.1R4.9
 mab@mab-infra:~$
 ```
@@ -495,6 +495,10 @@ result:
   stderr: ''
   stdout: ''
 mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 execution get 59fc23487cae22068a51a6ea -k result.raw.Ethernet1.is_up
+True
+mab@mab-infra:~$ 
+mab@mab-infra:~$ 
 mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=vmx1
 ..
 id: 59fc234f7cae22068a51a6ed
@@ -783,7 +787,7 @@ result:
 mab@mab-infra:~$ 
 ```
 
-- get_interfaces_ip:
+### get_interfaces_ip:
 ```
 mab@mab-infra:~$ st2 run napalm.get_interfaces hostname=arista1 ipaddresses=true
 .
@@ -921,7 +925,7 @@ result:
         tx_unicast_packets: -1
       em2:
         rx_broadcast_packets: -1
-        rx_discards: 0
+        rx_discards: 059fc22bd7cae22068a51a6e4
         rx_errors: 0
         rx_multicast_packets: -1
         rx_octets: 224881
@@ -1206,6 +1210,9 @@ result:
   stderr: ''
   stdout: ''
 mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 execution get 59fc24a47cae22068a51a702 -k result.raw.Ethernet1[0].hostname
+vmx1
+mab@mab-infra:~$ 
 mab@mab-infra:~$ st2 run napalm.get_lldp_neighbors hostname=vmx1 
 .
 id: 59fc24ab7cae22068a51a705
@@ -1227,7 +1234,7 @@ result:
 mab@mab-infra:~$
 ```
 
-### show_arp:
+### get_arp_table:
 ```
 mab@mab-infra:~$ st2 run napalm.get_arp_table hostname=arista1 
 .
@@ -1272,6 +1279,44 @@ result:
 mab@mab-infra:~$
 ```
 
+### ping:
+- Failing on Arista EOS for now
+
+```
+mab@mab-infra:~$ st2 run napalm.ping hostname=vmx1 destination=172.16.0.70
+...
+id: 5a0967b57cae220660295b6e
+status: succeeded
+parameters: 
+  destination: 172.16.0.70
+  hostname: vmx1
+result: 
+  exit_code: 0
+  result:
+    raw:
+      success:
+        packet_loss: 0
+        probes_sent: 5
+        results:
+        - ip_address: 172.16.0.70
+          rtt: 10.222
+        - ip_address: 172.16.0.70
+          rtt: 9.54
+        - ip_address: 172.16.0.70
+          rtt: 16.273
+        - ip_address: 172.16.0.70
+          rtt: 5.577
+        - ip_address: 172.16.0.70
+          rtt: 7.135
+        rtt_avg: 9.749
+        rtt_max: 16.273
+        rtt_min: 5.577
+        rtt_stddev: 3.662
+  stderr: ''
+  stdout: ''
+mab@mab-infra:~$ 
+```
+
 ## Setters (configuration commands):
 
 ### loadconfig:
@@ -1283,6 +1328,8 @@ router bgp 65070
    neighbor 172.16.0.30 remote-as 65030
    neighbor 172.16.0.30 description vmx1
    neighbor 172.16.0.30 maximum-routes 12000 
+mab@mab-infra:~$
+mab@mab-infra:~$
 mab@mab-infra:/opt/stackstorm/packs$ cat ~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/vmx1_bgp.txt 
 protocols {
     bgp {
@@ -1304,6 +1351,7 @@ protocols {
     }
 }
 mab@mab-infra:~$
+mab@mab-infra:~$
 mab@mab-infra:~$ st2 run napalm.loadconfig hostname=arista1 config_file=~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/arista1_bgp.txt
 ..
 id: 59fc299f7cae22068a51a72c
@@ -1316,6 +1364,7 @@ result:
   result: load (merge) successful on arista1
   stderr: ''
   stdout: ''
+mab@mab-infra:~$
 mab@mab-infra:~$
 mab@mab-infra:~$ st2 run napalm.loadconfig hostname=vmx1 config_file=~/mab_automate/napalm/labs/napalm-st2/lab1/config_files/vmx1_bgp.txt
 ..

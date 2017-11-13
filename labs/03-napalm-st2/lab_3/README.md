@@ -3,13 +3,14 @@
 ## Overview:
 - Event-Driven automation
 - Sections:
-    - [Setters (configuration commands)]()
+    - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-st2/lab_3#setters-configuration-commands)
+    [Validation (configuration/state check)]()
 
 ## Setters (configuration commands):
 
-### Fire cfg_bgp_all_iac from a Github Commit:
+### Fire a bgp configuration workflow from a Github Commit:
 
-- This is about using the same previous workflow ```cfg_bgp_all``` and attaching a rule to automatically fire this workflow based on a specfic event. This is essentially is the event-driven functionality which is the crux of Stackstorm. It allows to perform workflow automation without the need to manually invoke the st2 corresponding action.
+- This is about using the same previous workflow **cfg_bgp_all** and attaching a rule to automatically fire this workflow based on a specfic event. This is essentially is the event-driven functionality which is the crux of Stackstorm. It allows to perform workflow automation without the need to manually invoke the st2 corresponding action.
 - As an event we are going to choose a commit on the github repo as our event. To do that, we'll rely on a built-in sensor from the **git** pack: **GitCommitSensor**. This sensor polls a given Git repository for new commits. When a new commit is detected, a trigger is dispatched. In StackStorm the word **trigger** refers to an object that is a representation of an event. When the event occurs, the sensor produces a trigger that flows to the rule Engine, which in turns checks it for any match against the existing rules.
 
 - We create a rule that matches the trigger type **git.head_sha_monitor**, which is the trigger dispatched by the sensor **git.GitCommitSensor**. That rule will fire fire the **cfg_ebgp_iac** workflow.
@@ -60,10 +61,10 @@ mab@mab-infra:~$ st2 sensor list -p git
 +---------------------+------+-----------------------------------------------------+---------+
 mab@mab-infra:/opt/stackstorm/packs/git$
 ```
-
 - Git add/commit/push this to the [remote repository](https://github.com/mab27/network_iac):
-- Check 1) if the trigger has been dispatched, 2) if the rule matched and 3) if the corresponding workflow has been fired:
-
+```
+```
+- Check if the rule has been enforced:
 ```
 mab@mab-infra:~$ st2 rule-enforcement list -n 5
 +--------------------------+----------------------------+--------------------------+--------------------------+-----------------------------+
@@ -78,6 +79,10 @@ mab@mab-infra:~$ st2 rule-enforcement list -n 5
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 | Note: Only first 5 rule enforcements are displayed. Use -n/--last flag for more results.                                                  |
 +-------------------------------------------------------------------------------------------------------------------------------------------+
+mab@mab-infra:~$
+```
+- Check the content of the trigger that has been dispatched:
+```
 mab@mab-infra:~$ st2 trigger-instance get 5a05a3127cae2204054481ba
 +-----------------+--------------------------------------------------------------+
 | Property        | Value                                                        |
@@ -104,6 +109,9 @@ mab@mab-infra:~$ st2 trigger-instance get 5a05a3127cae2204054481ba
 | status          | processed                                                    |
 +-----------------+--------------------------------------------------------------+
 mab@mab-infra:~$
+```
+- Check the details of the workflow that has been fired, as a result of the rule enforcement:
+```
 mab@mab-infra:~$ st2 execution get 5a05a3127cae2204054481bd
 id: 5a05a3127cae2204054481bd
 action.ref: napalm.cfg_bgp_all_iac
@@ -144,9 +152,11 @@ end_timestamp: 2017-11-10T13:02:11.313099Z
 mab@mab-infra:~$
 ```
 
-### Fire cfg_bgp_all_iac from a generic Webhook:
+### Fire a bgp configuration workflow from a generic Webhook:
 
-### Check golden config after a decrease in LLDP neighbors:
+## Validation (configuration/state check):
+
+### React to a decrease in number of LLDP neighbors:
 
 - First enable the ```NapalmLLDPSensor```:
 ```
@@ -204,7 +214,7 @@ mab@mab-infra:~$ st2 trigger-instance list --trigger napalm.LLDPNeighborDecrease
 +--------------------------+-----------------------------+-------------------------------+-----------+
 mab@mab-infra:~$
 ```
-- Then you can check the details of the trigger-instance, it will give information like the device name, number of OldPeers, number of NewPeers:
+- Then you can check the details of the trigger-instance, it will give information like the **device** name, number of **OldPeers**, number of **NewPeers**:
 ```
 mab@mab-infra:~$ st2 trigger-instance get 5a05c81f7cae22047e60b32d
 +-----------------+-------------------------------------------------+
@@ -223,26 +233,7 @@ mab@mab-infra:~$ st2 trigger-instance get 5a05c81f7cae22047e60b32d
 +-----------------+-------------------------------------------------+
 mab@mab-infra:~$
 ```
-- xxx
-
-```
-mab@mab-infra:~$ st2 run napalm.check_consistency hostname=arista1 repository=https://github.com/mab27/network_iac.git 
-..
-id: 5a05d2247cae22068c7defb2
-status: succeeded
-parameters: 
-  hostname: arista1
-  repository: https://github.com/mab27/network_iac.git
-result: 
-  exit_code: 0
-  result:
-    deviation: false
-    diff_contents: ''
-  stderr: ''
-  stdout: ''
-mab@mab-infra:~$
-```
-
+- Check if the rule has been enforced:
 ```
 mab@mab-infra:~$ st2 rule-enforcement list -n 10
 +--------------------------+--------------------------------+--------------------------+--------------------------+-----------------------------+
@@ -264,8 +255,7 @@ mab@mab-infra:~$ st2 rule-enforcement list -n 10
 +-----------------------------------------------------------------------------------------------------------------------------------------------+
 mab@mab-infra:~$ 
 ```
-- x
-
+- Check the content of the trigger that has been dispatched:
 ```
 mab@mab-infra:~$ st2 trigger-instance get 5a05d5217cae22047e60b578
 +-----------------+-------------------------------------------------+
@@ -284,9 +274,7 @@ mab@mab-infra:~$ st2 trigger-instance get 5a05d5217cae22047e60b578
 +-----------------+-------------------------------------------------+
 mab@mab-infra:~$ 
 ```
-
-- x
-
+- Check the details of the workflow that has been fired, as a result of the rule enforcement:
 ```
 mab@mab-infra:~$ st2 execution get 5a05d5227cae22047e60b57e
 id: 5a05d5227cae22047e60b57e
@@ -303,4 +291,3 @@ result:
   stdout: ''
 mab@mab-infra:~$ 
 ```
-
