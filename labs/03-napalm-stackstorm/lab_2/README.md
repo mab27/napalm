@@ -5,7 +5,11 @@
 - Goal is to iterate againse the list of device in the inveotry list
 - Sections:
     - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_2#getters-show-commands)
+    	- [get_facts_all](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_2#get_facts_all)
+    	- [get_bgp_confg_all](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_2#get_bgp_confg_all)
+    	- [get_bgp_neighbors_all](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_2#get_bgp_neighbors_all)
     - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_2#setters-configuration-commands)
+    	- [cfg_bgp_all](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_2#cfg_bgp_all)
 
 ## Getters (show commands):
 

@@ -4,7 +4,10 @@
 - Event-Driven automation
 - Sections:
     - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#setters-configuration-commands)
+      - [Fire a bgp configuration workflow from a Github Commit](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#fire-a-bgp-configuration-workflow-from-a-github-commit)
     - [Validation (configuration/state check)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#validation-configurationstate-check)
+      - [React to a decrease in number of LLDP neighbors](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#react-to-a-decrease-in-number-of-lldp-neighbors)
+      - [Fire an investigation workflow from a generic Webhook](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_3#fire-an-investigation-workflow-from-a-generic-webhook)
 
 ## Setters (configuration commands):
 

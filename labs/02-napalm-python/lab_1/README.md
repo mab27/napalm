@@ -4,9 +4,20 @@
 - Simple python files. All information included in the files.
 - Sections:
     - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#getters-show-commands)
+    	- [get_bgp_config](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#get_bgp_config)
+    	- [get_bgp_neighbors_detail](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#get_bgp_neighbors_detail)
+    	- [get_interfaces](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#get_interfaces)
+    	- [get_interfaces_ip](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#get_interfaces_ip)
+    	- [get_lldp_neighbors](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#get_lldp_neighbors)
     - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#setters-configuration-commands)
+    	- [change_hostname](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#change_hostname)
+    	- [cfg_bgp](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#cfg_bgp)
     - [Validation](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#validation)
+    	- [basic_env](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#basic_env)
+    	- [bgp](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#bgp)
     - [Openconfig](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#openconfig)
+    	- [native_to_openconfig](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#native_to_openconfig)
+    	- [openconfig_to_native](https://github.com/mab27/napalm/tree/master/labs/02-napalm-python/lab_1#openconfig_to_native)
 
 ## Getters (show commands):
 

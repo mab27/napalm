@@ -4,7 +4,18 @@
 - Invoking standard actions from the NAPALM pack.
 - Sections:
     - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab1#getters-show-commands)
+    	- [get_facts](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_facts)
+      	- [get_bgp_config](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_bgp_config)
+    	- [get_bgp_neighbors](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_bgp_neighbors)
+      	- [get_bgp_neighbors_detail](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_bgp_neighbors_detail)
+      	- [get_interfaces](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_interfaces)
+      	- [get_interfaces_ip](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_interfaces_ip)
+      	- [get_interfaces_counters](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_interfaces_counters)
+      	- [get_lldp_neighbors](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_lldp_neighbors)
+      	- [get_arp_table](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#get_arp_table)
+      	- [ping](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#ping)
     - [Setters (configuration commands)](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#setters-configuration-commands)
+    	- [loadconfig](https://github.com/mab27/napalm/tree/master/labs/03-napalm-stackstorm/lab_1#loadconfig)
 
 ## Getters (show commands):
 
