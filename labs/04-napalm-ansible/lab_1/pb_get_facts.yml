@@ -3,21 +3,17 @@
   hosts: vendors-all
   connection: local
   gather_facts: no
-  vars:
   tasks:
-    
-    - name: "get facts from device"
+
+    - name: Get facts from device
       napalm_get_facts:
-        hostname: "{{ host }}"
-        username: "{{ user }}"
-        dev_os: "{{ os }}"
-        password: "{{ password }}"
-        optional_args:
-          port: "{{ port }}"
+        hostname: "{{ credentials.hostname }}"
+        username: "{{ credentials.username }}"
+        password: "{{ credentials.password }}"
+        dev_os: "{{ credentials.driver }}"
         filter: ['facts']
-        register: napalm_facts
-      
-    - name: Facts
-      debug:
-        msg: "{{ napalm_facts.ansible_facts.facts|to_nice_json }}"
-      tags: [print_action]
+      register: result
+
+    - name: print data
+      debug: 
+        var=result

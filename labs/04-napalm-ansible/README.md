@@ -1,3 +1,9 @@
 # NAPALM with Ansible:
 - This is about consuming napalm from Ansible
-- WORK IN PROGRESS !!!
+
+## Content:
+- 
+
+## Links:
+- http://napalm.readthedocs.io/en/latest/tutorials/ansible-napalm.html
+- https://github.com/napalm-automation/napalm-ansible
