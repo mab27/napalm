@@ -28,13 +28,13 @@ path_vars_files = "/home/mab/mab_automate/napalm/host_vars/"
 path_render_files = "/home/mab/mab_automate/napalm/render_files/"
 
 # Getting template
-eos_template_file_path = path_template_files + "cfg_ebgp/eos.j2"
+eos_template_file_path = path_template_files + "bgp_configure/eos.j2"
 eos_template_file=open(eos_template_file_path)
 s_eos=eos_template_file.read()
 eos_template_file.close()
 bgp_template_arista1=Template(s_eos)
 
-junos_template_file_path = path_template_files + "cfg_ebgp/junos.j2"
+junos_template_file_path = path_template_files + "bgp_configure/junos.j2"
 junos_template_file=open(junos_template_file_path)
 s_junos=junos_template_file.read()
 junos_template_file.close()

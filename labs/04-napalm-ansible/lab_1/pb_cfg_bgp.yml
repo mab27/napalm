@@ -1,0 +1,59 @@
+---
+- name: "Configure BGP"
+  hosts: vendors-all
+  connection: local
+  gather_facts: no
+  
+  vars:
+    path_template_files: "/home/mab/mab_automate/napalm/template_files"
+    path_vars_files: "/home/mab/mab_automate/napalm/host_vars"
+    path_render_files: "/home/mab/mab_automate/napalm/render_files"
+  
+  tasks:
+
+    - name: "Render BGP configuration"
+      template: 
+        src: "{{ path_template_files }}/bgp_configure/{{ credentials.driver }}.j2"
+        dest: "{{ path_render_files }}/bgp_configure/{{ credentials.hostname }}.txt"
+
+    - name: Install rendered configuration 
+      napalm_install_config:
+        hostname: "{{ credentials.hostname }}"
+        username: "{{ credentials.username }}"
+        password: "{{ credentials.password }}"
+        dev_os: "{{ credentials.driver }}"
+        config_file: "{{ path_render_files }}/bgp_configure/{{ credentials.hostname }}.txt"
+        commit_changes: "{{ commit_changes | default(True) }}"
+        replace_config: False
+
+
+- name: "Wait for peers to establish connections "
+  connection: local
+  gather_facts: no
+  
+  tasks:
+    - pause: seconds=18
+
+
+- name: "Audit devices"
+  hosts: vendors-all
+  connection: local
+  gather_facts: no
+  tags: 
+    - audit
+
+  tasks:
+
+    - name: "Render validation files"
+      template: 
+        src: "{{ path_template_files }}/bgp_validate/{{ credentials.driver }}.j2"
+        dest: "{{ path_render_files }}/bgp_validate/{{ credentials.hostname }}.yml"
+
+    - name: "Validate states"
+      napalm_validate: 
+        hostname: "{{ credentials.hostname }}"
+        username: "{{ credentials.username }}"
+        password: "{{ credentials.password }}"
+        dev_os: "{{ credentials.driver }}"
+        validation_file: "{{ path_render_files }}/bgp_validate/{{ credentials.hostname }}.yml"
+      register: validation_result

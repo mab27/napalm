@@ -19,7 +19,8 @@ for device_item in inventory:
 	password = inventory[device_item]['password']
 	driver = inventory[device_item]['driver']
 
-	validate_file_path = "validate_files/" + device_item + "_bgp.yml"
+	path_validate_files = "/home/mab/mab_automate/napalm/labs/02-napalm-python/lab_2/validation/validate_files/"
+	validate_file_path = path_validate_files + "/" + device_item + "_bgp.yml"
 
 	# Create Device Object
 	device_driver = get_network_driver(driver)

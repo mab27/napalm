@@ -2,7 +2,7 @@
 - This allows to consume the NAPALM library without writing any python script nor using any automation tool. This is a CLI you can use to directly interact with the network devices.
 - Sections:
 	- [Call methods](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#call-methods)
-	- [Call CLI](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#call-methods)
+	- [Call CLI](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#call-cli)
 	- [Configure](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#configure)
 	- [Debug Mode](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#debub-mode)
 

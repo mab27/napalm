@@ -1,0 +1,43 @@
+protocols {
+    bgp {
+        group underlay {
+            import bgp-in;
+            export bgp-out;
+            type external;
+            local-as 65030;
+            multipath multiple-as;
+            neighbor 172.16.0.70 {
+                peer-as 65070;
+                description aritsa1;
+            }
+            neighbor 172.16.0.80 {
+                peer-as 65080;
+                description aritsa2;
+            }
+            neighbor 172.16.0.40 {
+                peer-as 65040;
+                description vmx2;
+            }
+        }
+    }
+}
+routing-options {
+    router-id 30.30.30.30;
+    forwarding-table {
+        export bgp-ecmp;
+    }
+}
+
+policy-options {
+    policy-statement bgp-ecmp {
+        then {
+            load-balance per-packet;
+        }
+    }
+    policy-statement bgp-in {
+        then accept;
+    }
+    policy-statement bgp-out {
+        then accept;
+    }
+}

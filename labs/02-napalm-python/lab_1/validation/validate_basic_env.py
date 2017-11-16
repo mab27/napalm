@@ -17,7 +17,7 @@ vmx1 = {
 	'password': 'mab123',
 }
 
-path_validate_files = "/home/mab/mab_automate/napalm/labs/napalm-python/lab_1/validation/validate_files/"
+path_validate_files = "/home/mab/mab_automate/napalm/labs/02-napalm-python/lab_1/validation/validate_files/"
 
 arista1_validate_file_path = path_validate_files + "arista1_basic_env.yml"
 vmx1_validate_file_path = path_validate_files + "vmx1_basic_env.yml"

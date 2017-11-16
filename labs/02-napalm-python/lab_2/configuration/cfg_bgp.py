@@ -34,7 +34,7 @@ for device_item in inventory:
 
 	# Getting template
 	print ' - Getting template'
-	template_file=open(path_template_files + 'cfg_ebgp/' + driver + '.j2')
+	template_file=open(path_template_files + 'bgp_configure/' + driver + '.j2')
 	s=template_file.read()
 	template_file.close()
 	bgp_template=Template(s)

@@ -24,9 +24,9 @@
         with-items: device in <% list($.inventory.keys()) %>
         action: "default.render_file"
         input:
-          path_to_template: "<% $.env_path %>/template_files/cfg_ebgp/<% $.inventory[$.device][driver] %>.j2"
+          path_to_template: "<% $.env_path %>/template_files/bgp_configure/<% $.inventory[$.device][driver] %>.j2"
           path_to_variables: "<% $.env_path %>/host_vars/<% $.device %>.yml"
-          path_to_render: "<% $.env_path %>/render_files/cfg_ebgp/<% $.device %>.txt"
+          path_to_render: "<% $.env_path %>/render_files/bgp_validate/<% $.device %>.txt"
         on-complete:
           - load_config
 
@@ -35,7 +35,7 @@
         action: "napalm.loadconfig"
         input:
           hostname: "<% $.device %>"
-          config_file: "<% $.env_path %>/render_files/cfg_ebgp/<% $.device %>.txt"
+          config_file: "<% $.env_path %>/render_files/bgp_configure/<% $.device %>.txt"
         on-complete:
           - audit_config
 
