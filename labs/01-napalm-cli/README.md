@@ -2,9 +2,15 @@
 - This allows to consume the NAPALM library without writing any python script nor using any automation tool. This is a CLI you can use to directly interact with the network devices.
 - Sections:
 	- [Call methods](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#call-methods)
+		- [get_facts](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#get_facts)
+		- [get_bgp_config](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#get_bgp_config)
+		- [get_bgp_neigbors](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#get_bgp_neigbors)		
 	- [Call CLI](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#call-cli)
 	- [Configure](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#configure)
+		- [Example with Arista device]()
+		- [Example with Juniper device]()
 	- [Debug Mode](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#debub-mode)
+
 
 ## Call methods:
 
@@ -229,6 +235,8 @@ mab@mab-infra:~$
 
 ## Configure:
 
+### Example with Arista device:
+
 ```
 mab@mab-infra:~$ 
 mab@mab-infra:~$ napalm --user admin --password admin123 --vendor eos arista1 configure mab_automate/napalm/eos_new_config.txt --strategy merge --dry-run
@@ -382,6 +390,8 @@ mab@mab-infra:~$ napalm --user admin --password admin123 --vendor eos arista1 ca
 }
 mab@mab-infra:~$ 
 ```
+
+### Example with Junipers device:
 
 ```
 mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 configure mab_automate/napalm/junos_new_config.txt --strategy merge --dry-run
