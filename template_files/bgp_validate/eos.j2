@@ -1,6 +1,6 @@
 - get_bgp_neighbors_detail:
     default:
 {% for item in neighbors %}
-      {{item.asn }}: 
+      {{ item.asn }}: 
        - connection_state: Established
 {% endfor %}

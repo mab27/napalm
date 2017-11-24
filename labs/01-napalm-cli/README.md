@@ -4,7 +4,7 @@
 	- [Call methods](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#call-methods)
 		- [get_facts](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#get_facts)
 		- [get_bgp_config](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#get_bgp_config)
-		- [get_bgp_neigbors](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#get_bgp_neigbors)		
+		- [get_bgp_neighbors](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#get_bgp_neigbors)		
 	- [Call CLI](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#call-cli)
 	- [Configure](https://github.com/mab27/napalm/tree/master/labs/01-napalm-cli#configure)
 		- [Example with Arista device]()
@@ -539,6 +539,127 @@ mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 call ge
 }
 ```
 
+## validate:
+
+
+```
+mab@mab-infra:~$  cat subl /home/mab/mab_automate/napalm/render_files/bgp_validate/192.168.0.70.yml
+cat: subl: No such file or directory
+- get_bgp_neighbors_detail:
+    default:
+      65080: 
+       - connection_state: Established
+      65030: 
+       - connection_state: Established
+mab@mab-infra:~$  
+mab@mab-infra:~$ 
+mab@mab-infra:~$ napalm --user admin --password admin123 --vendor eos arista1 validate /home/mab/mab_automate/napalm/render_files/bgp_validate/192.168.0.70.yml
+{
+    "get_bgp_neighbors_detail": {
+        "extra": [], 
+        "complies": false, 
+        "present": {
+            "default": {
+                "diff": {
+                    "extra": [], 
+                    "complies": false, 
+                    "present": {
+                        "65080": {
+                            "expected_value": [
+                                {
+                                    "connection_state": "Established"
+                                }
+                            ], 
+                            "complies": false, 
+                            "actual_value": [
+                                {
+                                    "accepted_prefix_count": 0, 
+                                    "suppress_4byte_as": false, 
+                                    "local_as_prepend": false, 
+                                    "export_policy": "", 
+                                    "multihop": true, 
+                                    "input_messages": 0, 
+                                    "previous_connection_state": "Active", 
+                                    "output_messages": 0, 
+                                    "remove_private_as": false, 
+                                    "multipath": false, 
+                                    "messages_queued_out": 0, 
+                                    "keepalive": 60, 
+                                    "remote_as": 65080, 
+                                    "local_port": 0, 
+                                    "active_prefix_count": 0, 
+                                    "configured_holdtime": 180, 
+                                    "routing_table": "default", 
+                                    "flap_count": 0, 
+                                    "suppressed_prefix_count": 0, 
+                                    "local_address": "", 
+                                    "input_updates": 0, 
+                                    "configured_keepalive": 60, 
+                                    "router_id": "0.0.0.0", 
+                                    "connection_state": "", 
+                                    "local_as": 65070, 
+                                    "remote_address": "172.16.0.80", 
+                                    "advertised_prefix_count": 0, 
+                                    "local_address_configured": false, 
+                                    "import_policy": "", 
+                                    "last_event": "Start", 
+                                    "remote_port": 179, 
+                                    "up": false, 
+                                    "output_updates": 0, 
+                                    "received_prefix_count": 0, 
+                                    "holdtime": 180
+                                }
+                            ], 
+                            "nested": false
+                        }, 
+                        "65030": {
+                            "complies": true, 
+                            "nested": false
+                        }
+                    }, 
+                    "missing": []
+                }, 
+                "complies": false, 
+                "nested": true
+            }
+        }, 
+        "missing": []
+    }, 
+    "skipped": [], 
+    "complies": false
+}
+mab@mab-infra:~$ 
+mab@mab-infra:~$  
+mab@mab-infra:~$  cat subl /home/mab/mab_automate/napalm/render_files/bgp_validate/192.168.0.30.yml
+cat: subl: No such file or directory
+- get_bgp_neighbors_detail:
+    global:
+      65070: 
+       - connection_state: Established
+      65080: 
+       - connection_state: Connect
+      65040: 
+       - connection_state: Connect
+mab@mab-infra:~$  
+mab@mab-infra:~$  
+mab@mab-infra:~$ napalm --user mab --password mab123 --vendor junos vmx1 validate /home/mab/mab_automate/napalm/render_files/bgp_validate/192.168.0.30.yml
+{
+    "get_bgp_neighbors_detail": {
+        "extra": [], 
+        "complies": true, 
+        "present": {
+            "global": {
+                "complies": true, 
+                "nested": true
+            }
+        }, 
+        "missing": []
+    }, 
+    "skipped": [], 
+    "complies": true
+}
+mab@mab-infra:~$ 
+```
 
 ## Debub mode:
 ```

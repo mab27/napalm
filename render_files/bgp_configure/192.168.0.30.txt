@@ -10,14 +10,6 @@ protocols {
                 peer-as 65070;
                 description aritsa1;
             }
-            neighbor 172.16.0.80 {
-                peer-as 65080;
-                description aritsa2;
-            }
-            neighbor 172.16.0.40 {
-                peer-as 65040;
-                description vmx2;
-            }
         }
     }
 }

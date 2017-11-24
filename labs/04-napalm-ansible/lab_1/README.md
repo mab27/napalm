@@ -1,14 +1,14 @@
-# Lab_1
+# Lab_1:
 
 ## Overview:
-- Ansible playbooks using NAPALM modules
+- Ansible playbooks using NAPALM modules.
 - Sections:
-    - [Getters (show commands)]()
-    	- [get_facts]()
-      	- [get_facts (bgp_neighbors)]()
-        - [get_facts (bgp_neighbors_detail)]()
-    - [Setters (configuration commands)]()
-    	- [install_config]()
+    - [Getters (show commands)](https://github.com/mab27/napalm/tree/master/labs/04-napalm-ansible/lab_1#getters-show-commands)
+    	- [get_facts](https://github.com/mab27/napalm/tree/master/labs/04-napalm-ansible/lab_1#get_facts)
+      	- [get_facts (bgp_neighbors)](https://github.com/mab27/napalm/tree/master/labs/04-napalm-ansible/lab_1#get_facts-bgp_neighbors)
+        - [get_facts (bgp_neighbors_detail)](https://github.com/mab27/napalm/tree/master/labs/04-napalm-ansible/lab_1#get_facts-bgp_neighbors_detail)
+    - [Setters (configuration and validations commands)](https://github.com/mab27/napalm/tree/master/labs/04-napalm-ansible/lab_1#setters-configuration-commands)
+    	- [install_config](https://github.com/mab27/napalm/tree/master/labs/04-napalm-ansible/lab_1#install_config)
 
 ## Getters (show commands):
 
@@ -644,7 +644,7 @@ vmx2                       : ok=0    changed=0    unreachable=0    failed=1
 mab@mab-infra:~/mab_automate/napalm/labs/04-napalm-ansible$ 
 ```
 
-## Setters (configuration commands):
+## Setters (configuration and validation commands):
 
 ### install_config:
 
@@ -654,10 +654,10 @@ mab@mab-infra:~/mab_automate/napalm/labs/04-napalm-ansible$ ansible-playbook lab
 PLAY [Configure BGP] ***************************************************************************************************************************************************************************************
 
 TASK [Render BGP configuration] ****************************************************************************************************************************************************************************
-fatal: [vmx2]: FAILED! => {"changed": false, "failed": true, "msg": "AnsibleUndefinedVariable: 'local_asn' is undefined"}
 fatal: [arista2]: FAILED! => {"changed": false, "failed": true, "msg": "AnsibleUndefinedVariable: 'local_asn' is undefined"}
-ok: [vmx1]
-ok: [arista1]
+fatal: [vmx2]: FAILED! => {"changed": false, "failed": true, "msg": "AnsibleUndefinedVariable: 'local_asn' is undefined"}
+changed: [vmx1]
+changed: [arista1]
 
 TASK [Install rendered configuration] **********************************************************************************************************************************************************************
 ok: [vmx1]
@@ -673,21 +673,21 @@ ok: [localhost]
 PLAY [Audit devices] ***************************************************************************************************************************************************************************************
 
 TASK [Render validation files] *****************************************************************************************************************************************************************************
-ok: [vmx1]
+changed: [vmx1]
 changed: [arista1]
 
 TASK [Validate states] *************************************************************************************************************************************************************************************
-fatal: [arista1]: FAILED! => {"changed": false, "compliance_report": {"complies": false, "get_bgp_neighbors_detail": {"complies": false, "extra": [], "missing": [], "present": {"default": {"complies": false, "diff": {"complies": false, "extra": [], "missing": [], "present": {"65030": {"complies": true, "nested": false}, "65040": {"actual_value": [{"accepted_prefix_count": 0, "active_prefix_count": 0, "advertised_prefix_count": 0, "configured_holdtime": 180, "configured_keepalive": 60, "connection_state": "", "export_policy": "", "flap_count": 0, "holdtime": 180, "import_policy": "", "input_messages": 0, "input_updates": 0, "keepalive": 60, "last_event": "Start", "local_address": "", "local_address_configured": false, "local_as": 65070, "local_as_prepend": false, "local_port": 0, "messages_queued_out": 0, "multihop": true, "multipath": false, "output_messages": 0, "output_updates": 0, "previous_connection_state": "Active", "received_prefix_count": 0, "remote_address": "172.16.0.40", "remote_as": 65040, "remote_port": 179, "remove_private_as": false, "router_id": "0.0.0.0", "routing_table": "default", "suppress_4byte_as": false, "suppressed_prefix_count": 0, "up": false}], "complies": false, "expected_value": [{"connection_state": "Established"}], "nested": false}, "65080": {"actual_value": [{"accepted_prefix_count": 0, "active_prefix_count": 0, "advertised_prefix_count": 0, "configured_holdtime": 180, "configured_keepalive": 60, "connection_state": "", "export_policy": "", "flap_count": 0, "holdtime": 180, "import_policy": "", "input_messages": 0, "input_updates": 0, "keepalive": 60, "last_event": "Start", "local_address": "", "local_address_configured": false, "local_as": 65070, "local_as_prepend": false, "local_port": 0, "messages_queued_out": 0, "multihop": true, "multipath": false, "output_messages": 0, "output_updates": 0, "previous_connection_state": "Active", "received_prefix_count": 0, "remote_address": "172.16.0.80", "remote_as": 65080, "remote_port": 179, "remove_private_as": false, "router_id": "0.0.0.0", "routing_table": "default", "suppress_4byte_as": false, "suppressed_prefix_count": 0, "up": false}], "complies": false, "expected_value": [{"connection_state": "Established"}], "nested": false}}}, "nested": true}}}, "skipped": []}, "failed": true, "msg": "Device does not comply with policy"}
-fatal: [vmx1]: FAILED! => {"changed": false, "compliance_report": {"complies": false, "get_bgp_neighbors_detail": {"complies": false, "extra": [], "missing": [], "present": {"global": {"complies": false, "diff": {"complies": false, "extra": [], "missing": [], "present": {"65040": {"actual_value": [{"accepted_prefix_count": -1, "active_prefix_count": -1, "advertised_prefix_count": -1, "configured_holdtime": 90, "configured_keepalive": 0, "connection_state": "Active", "export_policy": "bgp-out", "flap_count": 0, "holdtime": 0, "import_policy": "bgp-in", "input_messages": -1, "input_updates": -1, "keepalive": 0, "last_event": "Start", "local_address": "172.16.0.30", "local_address_configured": false, "local_as": 65030, "local_as_prepend": false, "local_port": 179, "messages_queued_out": 0, "multihop": false, "multipath": true, "output_messages": -1, "output_updates": -1, "previous_connection_state": "Idle", "received_prefix_count": -1, "remote_address": "172.16.0.40", "remote_as": 65040, "remote_port": 179, "remove_private_as": false, "router_id": "", "routing_table": "global", "suppress_4byte_as": true, "suppressed_prefix_count": -1, "up": false}], "complies": false, "expected_value": [{"connection_state": "Established"}], "nested": false}, "65070": {"complies": true, "nested": false}, "65080": {"actual_value": [{"accepted_prefix_count": -1, "active_prefix_count": -1, "advertised_prefix_count": -1, "configured_holdtime": 90, "configured_keepalive": 0, "connection_state": "Active", "export_policy": "bgp-out", "flap_count": 0, "holdtime": 0, "import_policy": "bgp-in", "input_messages": -1, "input_updates": -1, "keepalive": 0, "last_event": "Start", "local_address": "172.16.0.30", "local_address_configured": false, "local_as": 65030, "local_as_prepend": false, "local_port": 179, "messages_queued_out": 0, "multihop": false, "multipath": true, "output_messages": -1, "output_updates": -1, "previous_connection_state": "Idle", "received_prefix_count": -1, "remote_address": "172.16.0.80", "remote_as": 65080, "remote_port": 179, "remove_private_as": false, "router_id": "", "routing_table": "global", "suppress_4byte_as": true, "suppressed_prefix_count": -1, "up": false}], "complies": false, "expected_value": [{"connection_state": "Established"}], "nested": false}}}, "nested": true}}}, "skipped": []}, "failed": true, "msg": "Device does not comply with policy"}
+ok: [arista1]
+ok: [vmx1]
  [WARNING]: Could not create retry file '/home/mab/mab_automate/napalm/labs/04-napalm-ansible/lab_1/pb_cfg_bgp.retry'.         [Errno 13] Permission denied: u'/home/mab/mab_automate/napalm/labs/04
 -napalm-ansible/lab_1/pb_cfg_bgp.retry'
 
 
 PLAY RECAP *************************************************************************************************************************************************************************************************
-arista1                    : ok=3    changed=1    unreachable=0    failed=1   
+arista1                    : ok=4    changed=2    unreachable=0    failed=0   
 arista2                    : ok=0    changed=0    unreachable=0    failed=1   
 localhost                  : ok=1    changed=0    unreachable=0    failed=0   
-vmx1                       : ok=3    changed=0    unreachable=0    failed=1   
+vmx1                       : ok=4    changed=2    unreachable=0    failed=0   
 vmx2                       : ok=0    changed=0    unreachable=0    failed=1   
 
 mab@mab-infra:~/mab_automate/napalm/labs/04-napalm-ansible$ 

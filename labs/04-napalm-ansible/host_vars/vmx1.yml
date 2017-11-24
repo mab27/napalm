@@ -6,11 +6,3 @@ neighbors:
     asn: 65070
     peer_ip: 172.16.0.70
     local_ip: 172.16.0.30
-  - name: aritsa2
-    asn: 65080
-    peer_ip: 172.16.0.80
-    local_ip: 172.16.0.30
-  - name: vmx2
-    asn: 65040
-    peer_ip: 172.16.0.40
-    local_ip: 172.16.0.30
