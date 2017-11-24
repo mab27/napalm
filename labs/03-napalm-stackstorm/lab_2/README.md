@@ -351,6 +351,34 @@ result:
   stderr: ''
   stdout: ''
 mab@mab-infra:~$ 
+mab@mab-infra:~$ 
+mab@mab-infra:~$ st2 run napalm.cfg_bgp_all device_list=/home/mab/mab_automate/napalm/inventory/inventory_restricted.yml 
+...................
+id: 5a184a037cae22068fe199ba
+action.ref: napalm.cfg_bgp_all
+parameters: 
+  device_list: /home/mab/mab_automate/napalm/inventory/inventory_restricted.yml
+status: succeeded
+result_task: end_task
+result: 
+  failed: false
+  return_code: 0
+  succeeded: true
+start_timestamp: 2017-11-24T16:34:11.745120Z
+end_timestamp: 2017-11-24T16:34:48.712188Z
++--------------------------+------------------------+---------------+--------------------------+-------------------------------+
+| id                       | status                 | task          | action                   | start_timestamp               |
++--------------------------+------------------------+---------------+--------------------------+-------------------------------+
+| 5a184a047cae22068fe199bd | succeeded (1s elapsed) | get_inventory | napalm.file_to_obj       | Fri, 24 Nov 2017 16:34:12 UTC |
+| 5a184a057cae22068fe199c0 | succeeded (2s elapsed) | render_config | default.render_file      | Fri, 24 Nov 2017 16:34:13 UTC |
+| 5a184a057cae22068fe199c1 | succeeded (2s elapsed) | render_config | default.render_file      | Fri, 24 Nov 2017 16:34:13 UTC |
+| 5a184a087cae22068fe199c4 | succeeded (5s elapsed) | load_config   | napalm.loadconfig        | Fri, 24 Nov 2017 16:34:16 UTC |
+| 5a184a087cae22068fe199c5 | succeeded (3s elapsed) | load_config   | napalm.loadconfig        | Fri, 24 Nov 2017 16:34:16 UTC |
+| 5a184a1d7cae22068fe199c8 | succeeded (2s elapsed) | audit_config  | napalm.get_bgp_neighbors | Fri, 24 Nov 2017 16:34:37 UTC |
+| 5a184a1d7cae22068fe199c9 | succeeded (3s elapsed) | audit_config  | napalm.get_bgp_neighbors | Fri, 24 Nov 2017 16:34:37 UTC |
+| 5a184a217cae22068fe199cb | succeeded (0s elapsed) | end_task      | core.noop                | Fri, 24 Nov 2017 16:34:41 UTC |
++--------------------------+------------------------+---------------+--------------------------+-------------------------------+
+mab@mab-infra:~$
 ```
 
 ## Validation:
