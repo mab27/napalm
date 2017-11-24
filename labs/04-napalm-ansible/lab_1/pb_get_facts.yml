@@ -11,7 +11,7 @@
         username: "{{ credentials.username }}"
         password: "{{ credentials.password }}"
         dev_os: "{{ credentials.driver }}"
-        filter: 'bgp_neighbors_detail'
+        filter: 'interfaces'
       register: result
 
     - name: print data
