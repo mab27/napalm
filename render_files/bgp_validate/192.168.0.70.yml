@@ -1,0 +1,8 @@
+- get_bgp_neighbors_detail:
+    default:
+      65080: 
+       - connection_state: Established
+      65030: 
+       - connection_state: Established
+      65040: 
+       - connection_state: Established

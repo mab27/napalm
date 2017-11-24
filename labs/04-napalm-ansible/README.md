@@ -1,5 +1,6 @@
 # NAPALM with Ansible:
 - This is about consuming napalm from Ansible
+- https://github.com/napalm-automation/napalm-ansible
 
 ## Content:
 - 
@@ -54,6 +55,3 @@ drwx------ 157 mab mab 12288 nov.  15 16:40 ../
 mab@mab-infra:~$ 
 mab@mab-infra:~$ 
 ```
-
-## Links:
-- https://github.com/napalm-automation/napalm-ansible
